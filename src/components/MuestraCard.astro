@@ -1,19 +1,24 @@
 ---
 // Tarjeta "ficha técnica" de la sección Muestras.
-// Header tipo ventana de navegador + mini-mockup CSS (bloques de color, sin
-// imágenes reales) + cuerpo con tag, título, descripción y specs dt/dd.
+// Header tipo ventana de navegador con dos modos:
+//  - previewImage: screenshot real de la demo desplegada (proyectos con `href`).
+//  - mockup* (fallback): mini-mockup CSS ilustrativo, sin imágenes reales,
+//    para proyectos que todavía no tienen demo pública.
 interface Spec {
   term: string;
   value: string;
 }
 interface Props {
-  mockupEyebrow: string;
-  mockupEyebrowColor: string;
-  mockupEyebrowOpacity: number;
-  mockupBg: string;
-  brand: string;
-  mockupCta: string;
-  blocks: [string, string, string];
+  /** Screenshot real de la demo. Si se pasa, reemplaza el mockup CSS. */
+  previewImage?: string;
+  previewAlt?: string;
+  mockupEyebrow?: string;
+  mockupEyebrowColor?: string;
+  mockupEyebrowOpacity?: number;
+  mockupBg?: string;
+  brand?: string;
+  mockupCta?: string;
+  blocks?: [string, string, string];
   title: string;
   description: string;
   specs: Spec[];
@@ -21,6 +26,8 @@ interface Props {
   href?: string;
 }
 const {
+  previewImage,
+  previewAlt,
   mockupEyebrow,
   mockupEyebrowColor,
   mockupEyebrowOpacity,
@@ -42,22 +49,32 @@ const {
       <span class="dot dot-bronce"></span>
       <span class="dot dot-paper"></span>
     </div>
-    <!-- mini-mockup ilustrativo (no es un cliente real) -->
-    <div class="mockup" style={`background:${mockupBg}`} aria-hidden="true">
-      <div
-        class="mockup-eyebrow"
-        style={`color:${mockupEyebrowColor};opacity:${mockupEyebrowOpacity}`}
-      >
-        {mockupEyebrow}
+    {previewImage ? (
+      <img
+        class="mockup-img"
+        src={previewImage}
+        alt={previewAlt ?? `Captura de ${title}`}
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      // mini-mockup ilustrativo (no es un cliente real)
+      <div class="mockup" style={`background:${mockupBg}`} aria-hidden="true">
+        <div
+          class="mockup-eyebrow"
+          style={`color:${mockupEyebrowColor};opacity:${mockupEyebrowOpacity}`}
+        >
+          {mockupEyebrow}
+        </div>
+        <div class="mockup-brand">{brand}</div>
+        <div class="mockup-cta">{mockupCta}</div>
+        <div class="mockup-blocks">
+          <div class="block" style={`background:${blocks?.[0]}`}></div>
+          <div class="block" style={`background:${blocks?.[1]}`}></div>
+          <div class="block" style={`background:${blocks?.[2]}`}></div>
+        </div>
       </div>
-      <div class="mockup-brand">{brand}</div>
-      <div class="mockup-cta">{mockupCta}</div>
-      <div class="mockup-blocks">
-        <div class="block" style={`background:${blocks[0]}`}></div>
-        <div class="block" style={`background:${blocks[1]}`}></div>
-        <div class="block" style={`background:${blocks[2]}`}></div>
-      </div>
-    </div>
+    )}
   </div>
 
   <div class="body">
@@ -122,6 +139,15 @@ const {
   }
   .dot-paper {
     background: rgb(241 237 225 / 0.4);
+  }
+
+  .mockup-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 15 / 8;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px 8px 0 0;
   }
 
   .mockup {
@@ -214,16 +240,24 @@ const {
   .demo-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 18px;
-    font-family: var(--font-mono);
-    font-size: 12px;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px 20px;
+    background: var(--color-rojo);
+    color: var(--color-papel);
+    font-family: var(--font-body);
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--color-bronce-claro);
-    transition: color 0.15s ease;
+    border-radius: 8px;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
   .demo-link:hover {
-    color: var(--color-papel);
+    background: var(--color-rojo-hover);
+    transform: translateY(-1px);
+  }
+  .demo-link svg {
+    flex: none;
   }
 </style>
