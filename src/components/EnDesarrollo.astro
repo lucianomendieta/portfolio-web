@@ -1,0 +1,111 @@
+---
+// Continúa el fondo carbón de Muestras (sin padding-top propio).
+---
+
+<section class="en-desarrollo">
+  <div class="head">
+    <span class="eyebrow">03 — en desarrollo</span>
+  </div>
+
+  <article class="piece" data-reveal>
+    <span class="badge">⚠ en obra</span>
+    <div class="content">
+      <h3 class="title">Un helpdesk para comercios chicos</h3>
+      <p class="desc">
+        Estoy armando mi propio producto: una forma simple de que un negocio
+        junte los mensajes de sus clientes en un solo lugar, sin planillas ni
+        WhatsApp perdido. Todavía no tiene demo pública — lo estoy puliendo con
+        calma para que sea fácil de usar de verdad.
+      </p>
+      <div class="specs">
+        <span>estado: en construcción</span>
+        <span>tipo: producto propio</span>
+        <span>demo: pronto</span>
+      </div>
+    </div>
+  </article>
+</section>
+
+<style>
+  .en-desarrollo {
+    background: var(--color-carbon);
+    color: var(--color-papel);
+    padding: 0 var(--pad-x) var(--pad-y);
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(24px, 5vw, 44px);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--color-bronce-claro);
+    text-transform: uppercase;
+  }
+
+  .piece {
+    position: relative;
+    border: 2px dashed rgb(241 237 225 / 0.2);
+    border-radius: 14px;
+    padding: clamp(26px, 5vw, 44px);
+    /* patrón diagonal tenue en bronce */
+    background: repeating-linear-gradient(
+      45deg,
+      rgb(176 133 68 / 0.05) 0 12px,
+      transparent 12px 24px
+    );
+  }
+
+  .badge {
+    position: absolute;
+    top: -13px;
+    left: 24px;
+    background: var(--color-bronce-claro);
+    color: var(--color-carbon);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(18px, 3vw, 28px);
+    max-width: 820px;
+    opacity: 0.85;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(24px, 5vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--color-papel);
+  }
+  .desc {
+    margin: 0;
+    font-size: clamp(15px, 3vw, 18px);
+    line-height: 1.6;
+    color: rgb(241 237 225 / 0.68);
+    max-width: 56ch;
+  }
+  .specs {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--color-bronce-claro);
+    letter-spacing: 0.03em;
+  }
+</style>

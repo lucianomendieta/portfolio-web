@@ -1,0 +1,58 @@
+---
+import WhatsappCta from './WhatsappCta.astro';
+import Footer from './Footer.astro';
+---
+
+<section id="contacto" class="cta-final">
+  <div class="stack">
+    <span class="eyebrow">05 — hablemos</span>
+    <h2 class="title">Contame de tu negocio y armamos tu web.</h2>
+    <p class="lede">
+      Un mensaje directo por WhatsApp y en el día te digo cómo lo encaramos. Sin
+      compromiso.
+    </p>
+    <div>
+      <WhatsappCta size="lg" />
+    </div>
+  </div>
+
+  <Footer />
+</section>
+
+<style>
+  .cta-final {
+    position: relative;
+    background: var(--color-tinta);
+    color: var(--color-papel);
+    padding: clamp(56px, 11vw, 140px) var(--pad-x);
+  }
+
+  .stack {
+    max-width: 900px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 2.6vw, 13px);
+    letter-spacing: 0.12em;
+    color: var(--color-bronce);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 18px 0 24px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h2-cta);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--color-papel);
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .lede {
+    margin: 0 0 32px;
+    font-size: clamp(16px, 3.4vw, 20px);
+    line-height: 1.55;
+    color: rgb(241 237 225 / 0.72);
+    max-width: 48ch;
+  }
+</style>

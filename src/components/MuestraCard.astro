@@ -1,0 +1,199 @@
+---
+// Tarjeta "ficha técnica" de la sección Muestras.
+// Header tipo ventana de navegador + mini-mockup CSS (bloques de color, sin
+// imágenes reales) + cuerpo con tag, título, descripción y specs dt/dd.
+interface Spec {
+  term: string;
+  value: string;
+}
+interface Props {
+  mockupEyebrow: string;
+  mockupEyebrowColor: string;
+  mockupEyebrowOpacity: number;
+  mockupBg: string;
+  brand: string;
+  mockupCta: string;
+  blocks: [string, string, string];
+  title: string;
+  description: string;
+  specs: Spec[];
+}
+const {
+  mockupEyebrow,
+  mockupEyebrowColor,
+  mockupEyebrowOpacity,
+  mockupBg,
+  brand,
+  mockupCta,
+  blocks,
+  title,
+  description,
+  specs,
+} = Astro.props;
+---
+
+<article class="card" data-reveal>
+  <div class="window">
+    <div class="dots" aria-hidden="true">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-bronce"></span>
+      <span class="dot dot-paper"></span>
+    </div>
+    <!-- mini-mockup ilustrativo (no es un cliente real) -->
+    <div class="mockup" style={`background:${mockupBg}`} aria-hidden="true">
+      <div
+        class="mockup-eyebrow"
+        style={`color:${mockupEyebrowColor};opacity:${mockupEyebrowOpacity}`}
+      >
+        {mockupEyebrow}
+      </div>
+      <div class="mockup-brand">{brand}</div>
+      <div class="mockup-cta">{mockupCta}</div>
+      <div class="mockup-blocks">
+        <div class="block" style={`background:${blocks[0]}`}></div>
+        <div class="block" style={`background:${blocks[1]}`}></div>
+        <div class="block" style={`background:${blocks[2]}`}></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="tag-row">
+      <span class="tag">proyecto de muestra</span>
+    </div>
+    <h3 class="card-title">{title}</h3>
+    <p class="card-desc">{description}</p>
+    <dl class="specs">
+      {
+        specs.map((s) => (
+          <>
+            <dt>{s.term}</dt>
+            <dd>{s.value}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--color-superficie);
+    border: 1px solid rgb(241 237 225 / 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.3);
+  }
+
+  .window {
+    position: relative;
+    background: var(--color-tinta);
+    padding: 14px 14px 0;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .dot-red {
+    background: var(--color-rojo);
+  }
+  .dot-bronce {
+    background: var(--color-bronce-claro);
+  }
+  .dot-paper {
+    background: rgb(241 237 225 / 0.4);
+  }
+
+  .mockup {
+    border-radius: 8px 8px 0 0;
+    padding: 22px 20px 24px;
+    color: var(--color-papel);
+  }
+  .mockup-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .mockup-brand {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.05;
+    margin: 8px 0 14px;
+  }
+  .mockup-cta {
+    display: inline-block;
+    background: var(--color-rojo);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+  }
+  .mockup-blocks {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .mockup-blocks .block {
+    flex: 1;
+    height: 38px;
+    border-radius: 6px;
+  }
+
+  .body {
+    padding: 22px 22px 24px;
+  }
+  .tag-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-bronce);
+    border: 1px solid rgb(156 122 52 / 0.5);
+    padding: 4px 8px;
+    border-radius: 5px;
+  }
+  .card-title {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--color-papel);
+  }
+  .card-desc {
+    margin: 0 0 18px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgb(241 237 225 / 0.65);
+  }
+  .specs {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .specs dt {
+    color: var(--color-bronce-claro);
+  }
+  .specs dd {
+    margin: 0;
+    color: rgb(241 237 225 / 0.75);
+  }
+</style>

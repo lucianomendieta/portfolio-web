@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — fuente de verdad del handoff.
+   En Tailwind 4 (CSS-first) todo lo declarado en @theme queda
+   expuesto como custom properties en :root y se puede consumir
+   con var(--token) desde los <style> scoped de cada componente.
+   ============================================================ */
+@theme {
+  /* Colores */
+  --color-tinta: #151b18;          /* tinta bosque   — fondo hero/servicios/CTA */
+  --color-carbon: #1c1712;         /* carbón cálido  — fondo muestras/en desarrollo */
+  --color-superficie: #241d16;     /* superficie carbón — fondo tarjetas de muestra */
+  --color-papel: #f1ede1;          /* papel arena    — texto sobre oscuro */
+  --color-rojo: #b23a2e;           /* rojo señal     — CTA / acentos */
+  --color-rojo-hover: #9a3126;     /* rojo hover */
+  --color-bronce: #9c7a34;         /* bronce apagado — sobre tinta bosque */
+  --color-bronce-claro: #b08544;   /* bronce claro   — sobre carbón cálido */
+
+  /* Tipografía */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Escala tipográfica fluida (clamp) */
+  --text-h1: clamp(38px, 8.5vw, 92px);
+  --text-h2: clamp(26px, 5.5vw, 44px);
+  --text-h2-cta: clamp(32px, 7.5vw, 72px);
+  --text-body: clamp(16px, 3.4vw, 21px);
+
+  /* Espaciado de sección (padding) */
+  --pad-y: clamp(48px, 9vw, 104px);
+  --pad-x: clamp(20px, 6vw, 88px);
+}
+
+/* ============================================================
+   BASE — reset ligero + comportamiento global (del dc.html)
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-tinta);
+    color: var(--color-papel);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: var(--color-rojo);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-bronce);
+  }
+
+  ::selection {
+    background: var(--color-rojo);
+    color: var(--color-papel);
+  }
+
+  /* Foco de teclado visible en TODO lo enfocable — nunca el azul default. */
+  :focus-visible {
+    outline: 2px solid var(--color-rojo);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

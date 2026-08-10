@@ -1,0 +1,110 @@
+---
+import MuestraCard from './MuestraCard.astro';
+
+// Contenido inventado — piezas de demostración, sin clientes reales.
+const cards = [
+  {
+    mockupEyebrow: 'Salón · Villa Morra',
+    mockupEyebrowColor: '#dd99aa',
+    mockupEyebrowOpacity: 0.8,
+    mockupBg: '#241f2b',
+    brand: 'Studio Aurora',
+    mockupCta: 'Reservá tu turno',
+    blocks: [
+      'linear-gradient(135deg,#3a3145,#2a2333)',
+      'linear-gradient(135deg,#4a2f36,#33232a)',
+      'linear-gradient(135deg,#3a3145,#2a2333)',
+    ] as [string, string, string],
+    title: 'Landing de salón de belleza',
+    description:
+      'Una página para mostrar servicios, fotos y horarios, con el botón de reserva siempre a mano.',
+    specs: [
+      { term: 'stack', value: 'Astro / Tailwind / TS' },
+      { term: 'propósito', value: 'reservas + visibilidad' },
+      { term: 'carga', value: '< 1s' },
+    ],
+  },
+  {
+    mockupEyebrow: 'Barbería · Centro',
+    mockupEyebrowColor: '#c9a978',
+    mockupEyebrowOpacity: 0.9,
+    mockupBg: '#1c1f1c',
+    brand: 'El Roble',
+    mockupCta: 'Pedí tu corte',
+    blocks: [
+      'linear-gradient(135deg,#2f3a30,#232a24)',
+      'linear-gradient(135deg,#4a2f36,#33232a)',
+      'linear-gradient(135deg,#3a3626,#2a271c)',
+    ] as [string, string, string],
+    title: 'Landing de barbería',
+    description:
+      'Estilo directo: qué cortan, cuánto tardan y cómo llegar. Pensada para el celular.',
+    specs: [
+      { term: 'stack', value: 'Astro / Tailwind / TS' },
+      { term: 'propósito', value: 'mobile-first · WhatsApp' },
+      { term: 'carga', value: '< 1s' },
+    ],
+  },
+];
+---
+
+<section id="muestras" class="muestras">
+  <div class="head">
+    <span class="eyebrow">02 — muestras</span>
+    <h2 class="title">Cómo se ve mi trabajo</h2>
+  </div>
+
+  <div class="grid">
+    {cards.map((c) => <MuestraCard {...c} />)}
+  </div>
+
+  <p class="footnote">
+    — piezas de demostración · contenido inventado, sin clientes reales
+  </p>
+</section>
+
+<style>
+  .muestras {
+    background: var(--color-carbon);
+    color: var(--color-papel);
+    padding: var(--pad-y) var(--pad-x);
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(32px, 6vw, 60px);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--color-bronce-claro);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h2);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-papel);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(24px, 4vw, 40px);
+  }
+
+  .footnote {
+    margin: clamp(24px, 4vw, 36px) 0 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: rgb(241 237 225 / 0.45);
+  }
+</style>

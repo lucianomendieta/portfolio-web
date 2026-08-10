@@ -1,0 +1,88 @@
+---
+// Fuentes self-hosted vía Fontsource (nada de CDN de Google Fonts).
+// Fraunces: 500, 600 · Inter: 400, 500, 600 · IBM Plex Mono: 400, 500.
+import '@fontsource/fraunces/500.css';
+import '@fontsource/fraunces/600.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+
+import '../styles/global.css';
+import { SITE } from '../config';
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(SITE.ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{SITE.title}</title>
+    <meta name="description" content={SITE.description} />
+    <meta name="theme-color" content="#151B18" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={SITE.title} />
+    <meta property="og:description" content={SITE.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={SITE.title} />
+    <meta name="twitter:description" content={SITE.description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Reveal al scroll: fade + translateY(22px → 0), 600ms.
+      // Dispara una sola vez por elemento. Respeta prefers-reduced-motion.
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+
+      if (!reduce && 'IntersectionObserver' in window) {
+        for (const el of els) el.classList.add('reveal-init');
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-in');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+        );
+
+        for (const el of els) io.observe(el);
+      }
+    </script>
+
+    <style is:global>
+      /* Estado inicial oculto sólo si JS activó el reveal (evita FOUC/sin-JS). */
+      [data-reveal].reveal-init {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      [data-reveal].reveal-in {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </body>
+</html>
