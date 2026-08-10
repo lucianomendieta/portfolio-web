@@ -1,0 +1,106 @@
+---
+import { site } from '../data/site';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+/**
+ * Layout base: <head> con SEO local completo + JSON-LD LocalBusiness.
+ * Los datos salen de src/data/site.ts (fuente única).
+ */
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = site.seo.title,
+  description = site.seo.description,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(site.seo.ogImage, Astro.site).href;
+
+// --- Schema JSON-LD: BeautySalon (subtipo de LocalBusiness) ---
+// Incluye dirección, teléfono, horario y aggregateRating (4.8 / 128), como pide el brief.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BeautySalon',
+  name: site.nombre,
+  description: site.seo.description,
+  image: ogImage,
+  url: canonical,
+  telephone: `+${site.contactoGeneral.numero}`,
+  priceRange: '₲₲', // TODO(dueño): ajustar rango de precios ($/$$/$$$) según menú real
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.direccion.calle,
+    addressLocality: `${site.direccion.barrio}, ${site.direccion.ciudad}`,
+    postalCode: site.direccion.codigoPostal,
+    addressCountry: site.direccion.pais,
+  },
+  openingHoursSpecification: site.horario.dias.map((d) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+    ].slice(
+      ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].indexOf(d.desde),
+      ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].indexOf(d.hasta) + 1,
+    ),
+    opens: d.abre,
+    closes: d.cierra,
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: site.rating.valor,
+    reviewCount: site.rating.cantidad,
+    bestRating: '5',
+  },
+  sameAs: [site.redes.instagram, site.redes.facebook],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F7EEF1" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.nombre} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon: TODO(dueño) reemplazar por el loto oficial en alta -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts: precarga optimizada (Cormorant Garamond + Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Schema JSON-LD LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <slot />
+  </body>
+</html>

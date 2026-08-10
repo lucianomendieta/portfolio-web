@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import LotoDivider from '../components/LotoDivider.astro';
+import Servicios from '../components/Servicios.astro';
+import PruebaSocial from '../components/PruebaSocial.astro';
+import Galeria from '../components/Galeria.astro';
+import Eventos from '../components/Eventos.astro';
+import Ubicacion from '../components/Ubicacion.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Nav />
+  <main id="contenido">
+    <Hero />
+
+    <!-- Orden justificado en el brief §4 -->
+    <Servicios />
+    <LotoDivider />
+    <PruebaSocial />
+    <Galeria />
+    <LotoDivider />
+    <Eventos />
+    <Ubicacion />
+  </main>
+  <Footer />
+</BaseLayout>

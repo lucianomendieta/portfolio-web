@@ -1,0 +1,158 @@
+---
+import { site } from '../data/site';
+
+/**
+ * "Para eventos y bodas" — servicio de alto ticket, sección propia (brief §4).
+ * Maquillaje + peinado profesional para novias y eventos.
+ * CTA -> WhatsApp de contacto general con mensaje precargado específico de bodas.
+ */
+
+// Link de consulta de bodas: número general + mensaje precargado propio.
+const consultaBodasHref =
+  `https://wa.me/${site.contactoGeneral.numero}` +
+  `?text=${encodeURIComponent('Hola! Quiero consultar por maquillaje y peinado para un evento/boda.')}`;
+
+// Qué incluye el servicio (editorial, ajustable por el dueño).
+// TODO(dueño): confirmar el detalle real del paquete de novia (prueba previa, cantidad
+//              de personas, si van al lugar del evento, etc.) y precio.
+const incluye = [
+  'Maquillaje profesional de larga duración',
+  'Peinado y recogido a medida',
+  'Asesoría de look según tu vestido y estilo',
+  'Prueba previa para novias', // TODO(dueño): confirmar si la prueba está incluida
+];
+---
+<section class="section section--dark eventos" id="eventos" aria-labelledby="eventos-title">
+  <div class="container eventos__grid">
+    <div class="eventos__content">
+      <p class="eyebrow">Eventos y bodas</p>
+      <h2 id="eventos-title" class="section-title">Tu look para el gran día</h2>
+      <p class="lead">
+        Maquillaje y peinado profesional para novias, madrinas y toda ocasión especial.
+        Te acompañamos desde la prueba hasta el último retoque, para que llegues
+        impecable y tranquila.
+      </p>
+
+      <ul class="eventos__incluye" role="list">
+        {incluye.map((item) => (
+          <li>
+            <svg class="eventos__check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10.5 8 14.5 16 5.5" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <div class="eventos__actions">
+        <a class="btn" href={consultaBodasHref} target="_blank" rel="noopener">
+          Consultar disponibilidad
+        </a>
+        {/* TODO(dueño): si armás un paquete con precio, lo mostramos acá ("Desde ___"). */}
+        <span class="eventos__hint">Cupos limitados por fecha · Reservá con tiempo</span>
+      </div>
+    </div>
+
+    <!-- Imagen del servicio. Se controla desde site.ts (`eventosImage`).
+         Con foto -> <img>. Sin foto -> placeholder con la medida (1000 × 1250 px, 4:5). -->
+    {site.eventosImage ? (
+      <figure class="eventos__media">
+        <img
+          class="eventos__img"
+          src={site.eventosImage}
+          alt="Maquillaje y peinado de novia en Studio Aurora"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    ) : (
+      <figure class="eventos__media" data-todo>
+        <div class="eventos__ph" role="img" aria-label="Foto de maquillaje y peinado de novia (pendiente)">
+          <span class="eventos__ph-cat">Novias &amp; eventos</span>
+          <span class="eventos__ph-size">1000 × 1250 px</span>
+        </div>
+      </figure>
+    )}
+  </div>
+</section>
+
+<style>
+  .eventos__grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .eventos__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-6); }
+  }
+
+  .eventos__incluye {
+    list-style: none;
+    margin: var(--space-4) 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .eventos__incluye li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-on-dark);
+  }
+  .eventos__check {
+    flex: none;
+    width: 22px; height: 22px;
+    margin-top: 1px;
+    color: var(--color-primary);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
+    border-radius: var(--radius-pill);
+    padding: 2px;
+  }
+
+  .eventos__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .eventos__hint { font-size: var(--fs-small); color: var(--color-on-dark-soft); }
+
+  /* Media / placeholder vertical */
+  .eventos__media { margin: 0; }
+  .eventos__img {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius);
+  }
+  .eventos__ph {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    text-align: center;
+    color: var(--color-on-dark-soft);
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        color-mix(in srgb, var(--color-primary) 10%, transparent) 0 12px,
+        transparent 12px 24px
+      ),
+      color-mix(in srgb, var(--color-on-dark) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
+  }
+  .eventos__ph-cat {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--color-primary);
+  }
+  .eventos__ph-size { font-size: 0.75rem; letter-spacing: 0.05em; }
+</style>

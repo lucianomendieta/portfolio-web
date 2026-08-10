@@ -1,0 +1,192 @@
+---
+import { servicios } from '../data/servicios';
+import { reservaHref } from '../data/site';
+import ServicioIcon from './ServicioIcon.astro';
+
+/**
+ * Servicios por línea: peluquería · barbería · spa · uñas · maquillaje/eventos.
+ * Cada tarjeta lista sus sub-servicios y un precio "desde".
+ * Los precios salen de src/data/servicios.ts (hoy null -> placeholder "Consultar").
+ */
+---
+<section class="section servicios" id="servicios" aria-labelledby="servicios-title">
+  <div class="container">
+    <header class="servicios__head">
+      <p class="eyebrow">Servicios</p>
+      <h2 id="servicios-title" class="section-title">Todo tu look, en un solo lugar</h2>
+      <p class="lead">
+        Cinco líneas de trabajo bajo el mismo techo boutique de Barrio Norte.
+        Elegí lo tuyo y reservá tu turno por WhatsApp.
+      </p>
+    </header>
+
+    <ul class="servicios__grid" role="list">
+      {servicios.map((s) => (
+        <li class="servicio-card">
+          <div class="servicio-card__icon" aria-hidden="true">
+            <ServicioIcon name={s.icono} />
+          </div>
+
+          <h3 class="servicio-card__name">{s.nombre}</h3>
+          <p class="servicio-card__desc">{s.descripcion}</p>
+
+          <ul class="servicio-card__items" role="list">
+            {s.items.map((item) => <li>{item}</li>)}
+          </ul>
+
+          <div class="servicio-card__foot">
+            {s.precioDesde ? (
+              <p class="servicio-card__price">
+                <span class="servicio-card__price-label">Desde</span>
+                <span class="servicio-card__price-value">{s.precioDesde}</span>
+              </p>
+            ) : (
+              // Sin monto cerrado: se muestra "Precio a consultar" (patrón habitual del rubro).
+              // Si el dueño confirma un "desde" real, cargarlo en servicios.ts y se reemplaza solo.
+              <p class="servicio-card__price servicio-card__price--consulta">
+                <span class="servicio-card__price-value">Precio a consultar</span>
+              </p>
+            )}
+            {s.nota && <p class="servicio-card__nota">{s.nota}</p>}
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="servicios__cta">
+      <p class="servicios__cta-text">
+        ¿No sabés qué elegir? Escribinos y te asesoramos sin compromiso.
+      </p>
+      <a class="btn" href={reservaHref} target="_blank" rel="noopener">
+        Reservar por WhatsApp
+      </a>
+    </div>
+
+    {/* TODO(dueño): si querés, sumamos un botón "Ver menú completo (PDF)" acá cuando exista. */}
+  </div>
+</section>
+
+<style>
+  .servicios__head { max-width: var(--container-narrow); margin-bottom: var(--space-6); }
+
+  .servicios__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 620px) {
+    .servicios__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 980px) {
+    .servicios__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .servicio-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
+                border-color var(--dur) var(--ease);
+  }
+  .servicio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+  }
+
+  .servicio-card__icon {
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-3);
+  }
+  .servicio-card__icon :global(.servicio-icon) { width: 28px; height: 28px; }
+
+  .servicio-card__name { font-size: var(--fs-h3); margin-bottom: 0.35rem; }
+  .servicio-card__desc {
+    color: var(--color-ink-soft);
+    font-size: var(--fs-small);
+    line-height: var(--lh-snug);
+    margin-bottom: var(--space-3);
+  }
+
+  .servicio-card__items {
+    list-style: none;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .servicio-card__items li {
+    font-size: var(--fs-small);
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-muted);
+    border: 1px solid var(--color-line);
+  }
+
+  .servicio-card__foot {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-line);
+  }
+  .servicio-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .servicio-card__price-label {
+    font-size: var(--fs-small);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .servicio-card__price-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  /* "Precio a consultar": tono discreto, sin el label "Desde" ni tamaño de monto. */
+  .servicio-card__price--consulta .servicio-card__price-value {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+  .servicio-card__nota {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    margin-top: 0.3rem;
+  }
+
+  .servicios__cta {
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+  }
+  .servicios__cta-text { color: var(--color-ink-soft); max-width: 40ch; }
+
+  @media (min-width: 720px) {
+    .servicios__cta {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+</style>

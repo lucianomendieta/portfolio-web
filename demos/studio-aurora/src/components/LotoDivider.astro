@@ -1,0 +1,63 @@
+---
+/**
+ * Divisor decorativo con el motivo del loto (identidad de Studio Aurora).
+ * Reutilizable entre secciones. Es puramente ornamental -> aria-hidden.
+ *
+ * Props:
+ *  - tone: 'ink' (dorado sobre claro) | 'light' (dorado sobre oscuro). Default 'ink'.
+ *
+ * NOTA(dueño): este es un loto vectorial simplificado hecho a mano para no depender
+ * de imágenes. Si tenés el loto oficial del logo en SVG, se puede sustituir acá.
+ */
+interface Props {
+  tone?: 'ink' | 'light';
+  class?: string;
+}
+const { tone = 'ink', class: className = '' } = Astro.props;
+---
+
+<div class:list={['loto-divider', { 'is-light': tone === 'light' }, className]} aria-hidden="true">
+  <span class="loto-divider__rule"></span>
+  <svg class="loto-divider__mark" viewBox="0 0 64 40" width="64" height="40" role="presentation" focusable="false">
+    <!-- Loto estilizado: pétalos simétricos -->
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 6 C 27 16, 27 28, 32 34 C 37 28, 37 16, 32 6 Z" />
+      <path d="M32 34 C 24 30, 18 22, 18 14 C 25 16, 30 24, 32 34 Z" />
+      <path d="M32 34 C 40 30, 46 22, 46 14 C 39 16, 34 24, 32 34 Z" />
+      <path d="M32 34 C 21 33, 12 27, 8 20 C 17 20, 27 26, 32 34 Z" />
+      <path d="M32 34 C 43 33, 52 27, 56 20 C 47 20, 37 26, 32 34 Z" />
+    </g>
+  </svg>
+  <span class="loto-divider__rule"></span>
+</div>
+
+<style>
+  .loto-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    color: var(--color-primary);
+    margin-block: var(--space-5);
+  }
+  .loto-divider__rule {
+    height: 1px;
+    width: min(120px, 20vw);
+    background: linear-gradient(
+      to var(--_dir, right),
+      transparent,
+      color-mix(in srgb, var(--color-primary) 55%, transparent)
+    );
+  }
+  .loto-divider__rule:last-child { --_dir: left; }
+  .loto-divider__mark { flex: none; opacity: 0.9; }
+
+  /* En secciones oscuras el dorado igual funciona, pero suavizamos las líneas */
+  .loto-divider.is-light .loto-divider__rule {
+    background: linear-gradient(
+      to var(--_dir, right),
+      transparent,
+      color-mix(in srgb, var(--color-primary) 70%, transparent)
+    );
+  }
+</style>

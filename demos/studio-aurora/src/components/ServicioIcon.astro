@@ -1,0 +1,53 @@
+---
+/**
+ * Íconos de línea de servicio (SVG inline, decorativos, currentColor).
+ * Trazo fino a tono con el loto. aria-hidden: el nombre de la línea ya da el contexto.
+ */
+interface Props { name: 'peluqueria' | 'barberia' | 'spa' | 'unas' | 'maquillaje'; }
+const { name } = Astro.props;
+---
+<svg class="servicio-icon" viewBox="0 0 32 32" fill="none"
+     stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"
+     aria-hidden="true" focusable="false">
+  {name === 'peluqueria' && (
+    <g>
+      {/* Tijera */}
+      <circle cx="8" cy="22" r="3.2" />
+      <circle cx="8" cy="10" r="3.2" />
+      <path d="M10.5 12 L26 24" />
+      <path d="M10.5 20 L26 8" />
+    </g>
+  )}
+  {name === 'barberia' && (
+    <g>
+      {/* Navaja / poste de barbería */}
+      <path d="M6 24 L20 10 a3 3 0 0 1 4 4 L10 28 a2.8 2.8 0 0 1-4-4Z" />
+      <path d="M22 6 l4 4" />
+    </g>
+  )}
+  {name === 'spa' && (
+    <g>
+      {/* Flor de loto / spa */}
+      <path d="M16 6 C13 12, 13 18, 16 22 C19 18, 19 12, 16 6Z" />
+      <path d="M16 22 C11 20, 8 15, 8 11 C13 12, 15 17, 16 22Z" />
+      <path d="M16 22 C21 20, 24 15, 24 11 C19 12, 17 17, 16 22Z" />
+      <path d="M6 24 q10 5, 20 0" />
+    </g>
+  )}
+  {name === 'unas' && (
+    <g>
+      {/* Mano / esmalte */}
+      <path d="M13 27 V15 a2 2 0 0 1 4 0 v-2 a2 2 0 0 1 4 0 v9" />
+      <path d="M21 22 v-3 a2 2 0 0 1 4 0 v6 a5 5 0 0 1-5 5 h-3 a5 5 0 0 1-4-2 l-3-4" />
+      <path d="M13 15 V9 a2 2 0 0 1 4 0 v6" />
+    </g>
+  )}
+  {name === 'maquillaje' && (
+    <g>
+      {/* Pincel de maquillaje */}
+      <path d="M9 23 L20 12" />
+      <path d="M18 10 l4 4 a2.5 2.5 0 0 1 0 3.5 L20 20 a2.5 2.5 0 0 1-3.5 0 l-4-4Z" transform="rotate(0)"/>
+      <path d="M9 23 l-3 3 4 1 1-4Z" />
+    </g>
+  )}
+</svg>

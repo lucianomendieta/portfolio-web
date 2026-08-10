@@ -1,0 +1,36 @@
+# === Dependencias ===
+node_modules/
+
+# === Build / cache de Astro ===
+dist/
+.astro/
+.output/
+.vercel/
+.netlify/
+
+# === Herramientas de Claude Code (config local, no versionar) ===
+.claude/
+
+# === Memoria de Claude (notas internas del asistente, no del proyecto) ===
+memory/
+
+# === Backups locales (originales pesados, no van al repo) ===
+_backups/
+
+# === Entorno / secretos ===
+.env
+.env.*
+!.env.example
+
+# === Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Sistema operativo / editor ===
+.DS_Store
+Thumbs.db
+*.local
+.vscode/
+.idea/

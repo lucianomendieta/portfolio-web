@@ -1,0 +1,141 @@
+---
+import { reservaHref, site } from '../data/site';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+---
+
+<section class="hero" id="top">
+  <!-- Imagen de fondo. Se controla desde site.ts (`heroImage`).
+       Con foto -> se pinta como background. Sin foto -> fallback crema con degradado. -->
+  {site.heroImage ? (
+    <div class="hero__bg" role="img"
+         style={`background-image:url('${site.heroImage}')`}
+         aria-label="Foto del salón Studio Aurora"></div>
+  ) : (
+    <div class="hero__bg hero__bg--todo" data-todo role="img"
+         aria-label="Foto del salón Studio Aurora (pendiente de subir)"></div>
+  )}
+  <div class="hero__scrim"></div>
+
+  <div class="container hero__inner">
+    <p class="hero__eyebrow">Peluquería · Spa · Barbería — {site.zona}</p>
+
+    <h1 class="hero__title">
+      Donde tu belleza<br />auténtica cobra vida
+    </h1>
+
+    <p class="hero__lead">
+      La experiencia boutique que ya eligieron {site.rating.cantidad} clientas en
+      el corazón del Barrio Norte. Reservá tu turno en segundos.
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn hero__cta" href={reservaHref} target="_blank" rel="noopener">
+        <WhatsAppIcon />
+        Reservar por WhatsApp
+      </a>
+      <a class="btn btn--outline" href="#servicios">Ver servicios</a>
+    </div>
+
+    <!-- Prueba social anticipada: chip de rating (dato confirmado en el brief) -->
+    <a class="hero__rating" href={site.rating.googleMapsUrl} target="_blank" rel="noopener">
+      <span class="hero__stars" aria-hidden="true">★★★★★</span>
+      <span>
+        <strong>{site.rating.valor}</strong> · {site.rating.cantidad} opiniones en Google
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-h);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Fondo del hero. Con foto real (site.heroImage) se pinta como background cover. */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  /* Fallback crema con textura sutil mientras no haya foto real */
+  .hero__bg--todo {
+    background:
+      radial-gradient(120% 120% at 75% 15%, #EFE7D9 0%, var(--color-bg) 55%),
+      var(--color-bg);
+  }
+  /* Velo para asegurar contraste del texto (AA) si se pone foto oscura */
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--color-bg) 78%, transparent) 0%,
+      color-mix(in srgb, var(--color-bg) 40%, transparent) 60%,
+      transparent 100%
+    );
+  }
+
+  .hero__inner {
+    max-width: 780px;
+    padding-block: var(--space-6);
+  }
+
+  .hero__eyebrow {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-3);
+  }
+
+  .hero__title {
+    font-size: var(--fs-hero);
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero__lead {
+    font-size: var(--fs-lead);
+    color: var(--color-ink-soft);
+    max-width: 46ch;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--fs-small);
+    color: var(--color-ink-soft);
+  }
+  .hero__stars {
+    color: var(--color-primary);
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+  }
+  .hero__rating strong { color: var(--color-ink); font-size: 1rem; }
+  .hero__rating:hover { color: var(--color-ink); }
+
+  @media (min-width: 860px) {
+    .hero__inner { padding-block: var(--space-7); }
+  }
+</style>

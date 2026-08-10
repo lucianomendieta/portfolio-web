@@ -1,0 +1,170 @@
+---
+import { resenas } from '../data/resenas';
+import { site } from '../data/site';
+
+/**
+ * Prueba social: 4.8★ · 128 opiniones (dato real) + tarjetas de reseña + link a Maps.
+ * Sección oscura (charcoal) para dar contraste y jerarquía al activo más fuerte del negocio.
+ * Los textos de reseña salen de src/data/resenas.ts (hoy placeholders marcados).
+ */
+
+// Estrellas para el rating global (4.8 -> 4 llenas + 1 parcial).
+const valor = parseFloat(site.rating.valor);
+const estrellas = Array.from({ length: 5 }, (_, i) => {
+  const fill = Math.max(0, Math.min(1, valor - i)); // 0..1 por estrella
+  return Math.round(fill * 100);
+});
+---
+<section class="section section--dark prueba" id="opiniones" aria-labelledby="opiniones-title">
+  <div class="container">
+    <div class="prueba__head">
+      <p class="eyebrow">Opiniones</p>
+      <h2 id="opiniones-title" class="section-title">Clientas que vuelven</h2>
+
+      <!-- Resumen de rating (dato confirmado) -->
+      <div class="rating-summary" role="img"
+           aria-label={`${site.rating.valor} de 5 estrellas, ${site.rating.cantidad} opiniones en Google`}>
+        <span class="rating-summary__value">{site.rating.valor}</span>
+        <span class="rating-summary__stars" aria-hidden="true">
+          {estrellas.map((pct) => (
+            <span class="star"><span class="star__fill" style={`width:${pct}%`}>★</span>★</span>
+          ))}
+        </span>
+        <span class="rating-summary__count">{site.rating.cantidad} opiniones en Google</span>
+      </div>
+    </div>
+
+    <ul class="prueba__grid" role="list">
+      {resenas.map((r) => (
+        <li class="resena">
+          <span class="resena__quote" aria-hidden="true">“</span>
+          {r.texto ? (
+            <blockquote class="resena__text">{r.texto}</blockquote>
+          ) : (
+            // TODO(dueño): pegar el texto real de Google en resenas.ts (tema sugerido abajo).
+            <blockquote class="resena__text resena__text--todo" data-todo>
+              Reseña real pendiente de cargar desde Google.
+              <span class="resena__hint">Tema sugerido: {r.tema}</span>
+            </blockquote>
+          )}
+          <div class="resena__foot">
+            <span class="resena__stars" aria-hidden="true">★★★★★</span>
+            <cite class="resena__autor">
+              {r.autor ?? '— Nombre de la clienta'}
+            </cite>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="prueba__cta">
+      <a class="btn btn--outline btn--on-dark" href={site.rating.googleMapsUrl}
+         target="_blank" rel="noopener">
+        Ver todas las opiniones en Google
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prueba__head {
+    text-align: center;
+    max-width: var(--container-narrow);
+    margin: 0 auto var(--space-6);
+  }
+  .prueba__head .eyebrow { display: block; }
+
+  /* --- Resumen de rating --- */
+  .rating-summary {
+    margin-top: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .rating-summary__value {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 7vw, 3.75rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .rating-summary__stars { display: inline-flex; gap: 0.15rem; font-size: 1.5rem; }
+  .rating-summary__count { color: var(--color-on-dark-soft); font-size: var(--fs-small); }
+
+  /* Estrella con relleno parcial (para el 4.8) */
+  .star {
+    position: relative;
+    color: rgba(247, 238, 241, 0.25); /* estrella vacía */
+    line-height: 1;
+  }
+  .star__fill {
+    position: absolute;
+    left: 0; top: 0;
+    overflow: hidden;
+    color: var(--color-primary); /* estrella llena */
+    white-space: nowrap;
+  }
+
+  /* --- Grid de reseñas --- */
+  .prueba__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .prueba__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .resena {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    background: color-mix(in srgb, var(--color-on-dark) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
+    border-radius: var(--radius);
+  }
+  .resena__quote {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 0.6;
+    color: var(--color-primary);
+    height: 1.2rem;
+  }
+  .resena__text {
+    margin: 0 0 var(--space-3);
+    font-size: 1.05rem;
+    line-height: var(--lh-body);
+    color: var(--color-on-dark);
+    flex-grow: 1;
+  }
+  .resena__text--todo { color: var(--color-on-dark-soft); font-style: italic; }
+  .resena__hint {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-style: normal;
+    color: var(--color-primary);
+  }
+  .resena__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: var(--space-2);
+    border-top: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
+  }
+  .resena__stars { color: var(--color-primary); letter-spacing: 0.1em; }
+  .resena__autor {
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--fs-small);
+    color: var(--color-on-dark-soft);
+  }
+
+  .prueba__cta { margin-top: var(--space-6); text-align: center; }
+</style>
