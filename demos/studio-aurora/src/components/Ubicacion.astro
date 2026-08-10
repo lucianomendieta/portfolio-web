@@ -3,10 +3,9 @@ import { site, mapsEmbedSrc, comoLlegarHref, contactoHref } from '../data/site';
 
 /**
  * Ubicación y horarios: mapa embebido (sin API key) + dirección + horario + contacto.
- * Horario: Lunes a sábado 9–20 hs, domingo cerrado.
  */
 
-// Tabla de horarios para mostrar (dato del brief; domingo cerrado).
+// Tabla de horarios para mostrar.
 const horarios = [
   { dia: 'Lunes a viernes', horas: '9:00 – 20:00', abierto: true },
   { dia: 'Sábado',          horas: '9:00 – 20:00', abierto: true },
@@ -56,14 +55,13 @@ const horarios = [
               </li>
             ))}
           </ul>
-          {/* TODO(dueño): confirmar horario semanal vigente (brief §9: Google mostró una excepción). */}
         </div>
 
         <div class="info-block">
           <h3 class="info-block__title">Contacto</h3>
           <p class="info-block__addr">
             <a href={`tel:+${site.contactoGeneral.numero}`}>
-              +595 981 846 353
+              +595 981 234 567
             </a>
           </p>
           <a class="btn btn--outline info-block__btn" href={contactoHref}

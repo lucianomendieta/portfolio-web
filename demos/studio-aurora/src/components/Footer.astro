@@ -3,7 +3,7 @@ import { site, reservaHref, contactoHref, comoLlegarHref } from '../data/site';
 
 /**
  * Footer: cierre de la landing. Redes (IG/FB) + WhatsApp + dirección/horario
- * resumidos + créditos. "La web es la casa, las redes las ventanas" (brief §4).
+ * resumidos + créditos.
  */
 const anio = new Date().getFullYear();
 ---
@@ -23,7 +23,7 @@ const anio = new Date().getFullYear();
     <div class="footer__brand">
       <p class="footer__name">Studio&nbsp;Aurora</p>
       <p class="footer__tagline">
-        Peluquería, spa y barbería boutique en Barrio Norte.
+        Peluquería, spa y barbería en Barrio Norte.
       </p>
       <div class="footer__social">
         <a href={site.redes.instagram} target="_blank" rel="noopener"
@@ -53,7 +53,6 @@ const anio = new Date().getFullYear();
       <a href="#servicios">Servicios</a>
       <a href="#opiniones">Opiniones</a>
       <a href="#galeria">Galería</a>
-      <a href="#eventos">Eventos y bodas</a>
       <a href="#ubicacion">Ubicación</a>
     </nav>
 
@@ -64,9 +63,8 @@ const anio = new Date().getFullYear();
         {site.direccion.calle}<br />{site.direccion.barrio}, {site.direccion.ciudad}
       </a>
       <p class="footer__hours">{site.horario.resumen}</p>
-      <a href={`tel:+${site.contactoGeneral.numero}`}>+595 981 846 353</a>
+      <a href={`tel:+${site.contactoGeneral.numero}`}>+595 981 234 567</a>
       <a href={contactoHref} target="_blank" rel="noopener">WhatsApp</a>
-      {/* TODO(dueño): sumar email de contacto cuando esté disponible (brief §9). */}
     </div>
   </div>
 

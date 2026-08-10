@@ -20,7 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(site.seo.ogImage, Astro.site).href;
 
 // --- Schema JSON-LD: BeautySalon (subtipo de LocalBusiness) ---
-// Incluye dirección, teléfono, horario y aggregateRating (4.8 / 128), como pide el brief.
+// Incluye dirección, teléfono, horario y aggregateRating.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BeautySalon',
@@ -29,7 +29,7 @@ const jsonLd = {
   image: ogImage,
   url: canonical,
   telephone: `+${site.contactoGeneral.numero}`,
-  priceRange: '₲₲', // TODO(dueño): ajustar rango de precios ($/$$/$$$) según menú real
+  priceRange: '₲₲',
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.direccion.calle,
@@ -84,7 +84,6 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Favicon: TODO(dueño) reemplazar por el loto oficial en alta -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Google Fonts: precarga optimizada (Cormorant Garamond + Inter) -->

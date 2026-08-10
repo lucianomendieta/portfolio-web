@@ -17,6 +17,8 @@ interface Props {
   title: string;
   description: string;
   specs: Spec[];
+  /** Link a la demo desplegada. Si no se pasa, la card no muestra el CTA. */
+  href?: string;
 }
 const {
   mockupEyebrow,
@@ -29,6 +31,7 @@ const {
   title,
   description,
   specs,
+  href,
 } = Astro.props;
 ---
 
@@ -73,6 +76,17 @@ const {
         ))
       }
     </dl>
+    {href && (
+      <a class="demo-link" href={href} target="_blank" rel="noopener noreferrer">
+        Ver demo
+        <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor"
+             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 3h7v7" />
+          <path d="M13 3 5 11" />
+          <path d="M11 9v4H3V5h4" />
+        </svg>
+      </a>
+    )}
   </div>
 </article>
 
@@ -195,5 +209,21 @@ const {
   .specs dd {
     margin: 0;
     color: rgb(241 237 225 / 0.75);
+  }
+
+  .demo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-bronce-claro);
+    transition: color 0.15s ease;
+  }
+  .demo-link:hover {
+    color: var(--color-papel);
   }
 </style>

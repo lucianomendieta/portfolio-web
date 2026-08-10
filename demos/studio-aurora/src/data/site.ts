@@ -48,14 +48,14 @@ export const site = {
   rating: {
     valor: '4.9',
     cantidad: 214,
-    googleMapsUrl: 'https://maps.google.com/?q=Studio+Aurora',
+    googleMapsUrl: '',
   },
 
   // --- Redes (ficticias) ---
   redes: {
-    instagram: 'https://instagram.com/studioaurora',
+    instagram: '',
     instagramHandle: '@studioaurora',
-    facebook: 'https://facebook.com/studioaurora',
+    facebook: '',
   },
 
   // --- Imagen del hero (fondo de la portada) ---
@@ -64,15 +64,11 @@ export const site = {
   // Si queda vacío (''), el hero usa el fondo con degradado (fallback).
   heroImage: '/img/hero.jpg',
 
-  // --- Imagen de la sección Eventos y bodas ---
-  // Recomendado: VERTICAL 1000 × 1250 (4:5), JPG/WebP optimizado < 300 KB.
-  eventosImage: '/img/galeria/boda.jpg',
-
   // --- SEO ---
   seo: {
-    title: 'Studio Aurora — Peluquería y Spa boutique',
+    title: 'Studio Aurora — Peluquería, spa y barbería',
     description:
-      'Peluquería, spa y barbería boutique. Color, corte, barbería, manicura, spa y maquillaje para eventos. Reservá tu turno por WhatsApp.',
+      'Peluquería, spa y barbería en Barrio Norte. Color, corte, faciales y manicura. Reservá tu turno por WhatsApp.',
     ogImage: '/img/og-studio-aurora.jpg',
   },
 } as const;
@@ -89,7 +85,7 @@ export const reservaHref =
   `https://wa.me/${site.reservasWhatsApp.numero}` +
   `?text=${encodeURIComponent(site.reservasWhatsApp.mensaje)}`;
 
-/** Link de WhatsApp para consultas generales (bodas/eventos, dudas). */
+/** Link de WhatsApp para consultas generales. */
 export const contactoHref = `https://wa.me/${site.contactoGeneral.numero}`;
 
 /**

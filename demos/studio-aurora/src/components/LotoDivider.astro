@@ -4,10 +4,7 @@
  * Reutilizable entre secciones. Es puramente ornamental -> aria-hidden.
  *
  * Props:
- *  - tone: 'ink' (dorado sobre claro) | 'light' (dorado sobre oscuro). Default 'ink'.
- *
- * NOTA(dueño): este es un loto vectorial simplificado hecho a mano para no depender
- * de imágenes. Si tenés el loto oficial del logo en SVG, se puede sustituir acá.
+ *  - tone: 'ink' (malva sobre claro) | 'light' (malva sobre oscuro). Default 'ink'.
  */
 interface Props {
   tone?: 'ink' | 'light';
@@ -52,7 +49,7 @@ const { tone = 'ink', class: className = '' } = Astro.props;
   .loto-divider__rule:last-child { --_dir: left; }
   .loto-divider__mark { flex: none; opacity: 0.9; }
 
-  /* En secciones oscuras el dorado igual funciona, pero suavizamos las líneas */
+  /* En secciones oscuras el acento igual funciona, pero suavizamos las líneas */
   .loto-divider.is-light .loto-divider__rule {
     background: linear-gradient(
       to var(--_dir, right),

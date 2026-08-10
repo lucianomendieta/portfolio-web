@@ -1,6 +1,7 @@
 /* =========================================================================
    Design tokens — Studio Aurora (demo)
-   Paleta y tipografías EXACTAS del brief (§6). No inventar otros colores.
+   Paleta blush/malva + tipografías. Fuente única de verdad: no hardcodear
+   colores sueltos en los componentes, usar estas variables.
    ========================================================================= */
 
 :root {
@@ -38,7 +39,7 @@
   --tracking-wide: 0.16em;   /* para eyebrows / labels en mayúscula */
 
   /* --- Forma y espacio --- */
-  --radius: 12px;            /* del brief */
+  --radius: 12px;
   --radius-sm: 8px;
   --radius-pill: 999px;
 

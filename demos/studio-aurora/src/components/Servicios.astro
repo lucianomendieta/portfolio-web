@@ -4,7 +4,7 @@ import { reservaHref } from '../data/site';
 import ServicioIcon from './ServicioIcon.astro';
 
 /**
- * Servicios por línea: peluquería · barbería · spa · uñas · maquillaje/eventos.
+ * Servicios por línea: peluquería · barbería · spa · uñas.
  * Cada tarjeta lista sus sub-servicios y un precio "desde".
  * Los precios salen de src/data/servicios.ts (hoy null -> placeholder "Consultar").
  */
@@ -13,10 +13,9 @@ import ServicioIcon from './ServicioIcon.astro';
   <div class="container">
     <header class="servicios__head">
       <p class="eyebrow">Servicios</p>
-      <h2 id="servicios-title" class="section-title">Todo tu look, en un solo lugar</h2>
+      <h2 id="servicios-title" class="section-title">Nuestros servicios</h2>
       <p class="lead">
-        Cinco líneas de trabajo bajo el mismo techo boutique de Barrio Norte.
-        Elegí lo tuyo y reservá tu turno por WhatsApp.
+        Cuatro líneas de trabajo, un mismo lugar. Elegí la tuya y reservá por WhatsApp.
       </p>
     </header>
 
@@ -61,8 +60,6 @@ import ServicioIcon from './ServicioIcon.astro';
         Reservar por WhatsApp
       </a>
     </div>
-
-    {/* TODO(dueño): si querés, sumamos un botón "Ver menú completo (PDF)" acá cuando exista. */}
   </div>
 </section>
 

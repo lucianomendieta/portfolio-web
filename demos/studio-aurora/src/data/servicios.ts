@@ -1,13 +1,6 @@
 /**
  * Líneas de servicio (demo Studio Aurora).
- *
- * PRECIOS: el brief (§9) confirma que NO hay menú de precios cerrado.
- * Único ancla real: corte + barba > 200.000 Gs (de una reseña).
- * Todos los demás precios quedan como placeholder "desde ___" con `precio: null`
- * -> el componente muestra el aviso de "consultar" y marca el dato como pendiente.
- *
- * TODO(dueño): completar los precios "desde" reales de cada línea y afinar la lista
- *              de sub-servicios. No inventamos montos.
+ * Sin menú de precios cerrado: `precioDesde: null` muestra "Precio a consultar".
  */
 
 export interface Servicio {
@@ -19,50 +12,42 @@ export interface Servicio {
   items: string[];
   /**
    * Precio "desde" en guaraníes como texto ya formateado (ej. "150.000 Gs"),
-   * o null si todavía no está confirmado -> se muestra placeholder.
+   * o null si no está definido -> se muestra placeholder.
    */
   precioDesde: string | null;
-  /** Nota opcional (ej. ancla de precio confirmada) */
+  /** Nota opcional */
   nota?: string;
   /** Ícono decorativo (id interno, ver componente) */
-  icono: 'peluqueria' | 'barberia' | 'spa' | 'unas' | 'maquillaje';
+  icono: 'peluqueria' | 'barberia' | 'spa' | 'unas';
 }
 
 export const servicios: Servicio[] = [
   {
     nombre: 'Peluquería',
-    descripcion: 'Color, corte y peinado con acabado de salón.',
+    descripcion: 'Color, corte y peinado.',
     items: ['Color', 'Corte', 'Peinado', 'Tratamientos'],
-    precioDesde: null, // TODO(dueño): precio "desde" real
+    precioDesde: null,
     icono: 'peluqueria',
   },
   {
     nombre: 'Barbería',
-    descripcion: 'Corte y barba con barberos de nombre propio.',
+    descripcion: 'Corte y barba.',
     items: ['Corte', 'Barba'],
-    precioDesde: null, // TODO(dueño): confirmar "desde" del corte solo
+    precioDesde: null,
     icono: 'barberia',
   },
   {
     nombre: 'Spa',
-    descripcion: 'Un momento para vos: relax y cuidado en un ambiente boutique.',
+    descripcion: 'Faciales y tratamientos corporales.',
     items: ['Faciales', 'Tratamientos corporales', 'Relax'],
-    precioDesde: null, // TODO(dueño): definir servicios y precio "desde"
+    precioDesde: null,
     icono: 'spa',
   },
   {
     nombre: 'Uñas',
-    descripcion: 'Manicura y pedicura prolijas, como te gustan.',
+    descripcion: 'Manicura y pedicura.',
     items: ['Manicura', 'Pedicura', 'Esmaltado semipermanente'],
-    precioDesde: null, // TODO(dueño): precio "desde" real
+    precioDesde: null,
     icono: 'unas',
-  },
-  {
-    nombre: 'Maquillaje y eventos',
-    descripcion: 'Maquillaje y peinado profesional para tu ocasión especial.',
-    items: ['Maquillaje social', 'Peinado', 'Novias y eventos'],
-    precioDesde: null, // TODO(dueño): precio "desde" real
-    nota: 'Paquetes de novia y eventos ↓', // ver sección propia "Eventos y bodas"
-    icono: 'maquillaje',
   },
 ];

@@ -3,12 +3,11 @@ import { resenas } from '../data/resenas';
 import { site } from '../data/site';
 
 /**
- * Prueba social: 4.8★ · 128 opiniones (dato real) + tarjetas de reseña + link a Maps.
- * Sección oscura (charcoal) para dar contraste y jerarquía al activo más fuerte del negocio.
- * Los textos de reseña salen de src/data/resenas.ts (hoy placeholders marcados).
+ * Prueba social: rating + tarjetas de reseña. Sección oscura para dar contraste
+ * y jerarquía. Los textos de reseña salen de src/data/resenas.ts.
  */
 
-// Estrellas para el rating global (4.8 -> 4 llenas + 1 parcial).
+// Estrellas para el rating global (ej. 4.9 -> 4 llenas + 1 parcial).
 const valor = parseFloat(site.rating.valor);
 const estrellas = Array.from({ length: 5 }, (_, i) => {
   const fill = Math.max(0, Math.min(1, valor - i)); // 0..1 por estrella
