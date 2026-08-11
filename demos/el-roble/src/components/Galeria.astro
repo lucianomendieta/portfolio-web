@@ -1,0 +1,140 @@
+---
+import { galeria } from '../data/galeria';
+import { site } from '../data/site';
+
+/**
+ * Galería de trabajos — grid uniforme (celdas cuadradas, sin JS).
+ * Todas las celdas tienen la misma proporción (1:1) y las fotos se recortan con
+ * object-fit: cover, así las filas quedan parejas (4 por fila en escritorio).
+ * Fotos reales pendientes: cada celda muestra un placeholder hasta que el dueño
+ * cargue `src` en src/data/galeria.ts. Con foto real -> <img loading="lazy">.
+ * Medida recomendada para subir: 1000 × 1000 px (cuadrada).
+ */
+---
+<section class="section galeria" id="galeria" aria-labelledby="galeria-title">
+  <div class="container">
+    <header class="galeria__head">
+      <p class="eyebrow">Galería</p>
+      <h2 id="galeria-title" class="section-title">Nuestros trabajos</h2>
+      <p class="lead">
+        Una muestra de lo que hacemos, día a día.
+      </p>
+    </header>
+
+    <div class="galeria__grid">
+      {galeria.map((foto) => (
+        <figure class="galeria__item">
+          {foto.src ? (
+            <img
+              src={foto.src}
+              alt={foto.alt}
+              loading="lazy"
+              decoding="async"
+              class="galeria__img"
+            />
+          ) : (
+            // TODO(dueño): subir foto real a /public/img/galeria/ y setear `src` + `alt`.
+            <div class="galeria__ph" data-todo role="img" aria-label={`${foto.alt} (foto pendiente)`}>
+              <span class="galeria__ph-cat">{foto.categoria}</span>
+              <span class="galeria__ph-size">1000 × 1000 px</span>
+            </div>
+          )}
+          <figcaption class="galeria__cap">{foto.categoria}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="galeria__more">
+      Más trabajos en nuestro Instagram
+      <a href={site.redes.instagram} target="_blank" rel="noopener">{site.redes.instagramHandle}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .galeria__head { max-width: var(--container-narrow); margin-bottom: var(--space-6); }
+
+  /* Grid uniforme: filas parejas (2 → 3 → 4 columnas según ancho). */
+  .galeria__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  @media (min-width: 720px)  { .galeria__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1040px) { .galeria__grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .galeria__item {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+  .galeria__item:hover .galeria__cap { opacity: 1; transform: translateY(0); }
+
+  .galeria__img,
+  .galeria__ph {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  .galeria__img {
+    transition: transform var(--dur) var(--ease);
+  }
+  .galeria__item:hover .galeria__img { transform: scale(1.04); }
+
+  /* Placeholder con la medida (crema con línea dorada sutil) */
+  .galeria__ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        color-mix(in srgb, var(--color-primary) 6%, transparent) 0 12px,
+        transparent 12px 24px
+      ),
+      var(--color-surface);
+    color: var(--color-muted);
+    text-align: center;
+    padding: var(--space-2);
+  }
+  .galeria__ph-cat {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    color: var(--color-ink);
+  }
+  .galeria__ph-size { font-size: 0.75rem; letter-spacing: 0.05em; }
+
+  /* Caption que aparece en hover sobre foto real */
+  .galeria__cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 1.5rem 1rem 0.9rem;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--color-white);
+    background: linear-gradient(to top, rgba(10, 11, 9, 0.85), transparent);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  /* Sobre placeholder no mostramos el caption oscuro (ya se ve la categoría) */
+  .galeria__ph ~ .galeria__cap { display: none; }
+
+  .galeria__more {
+    margin-top: var(--space-5);
+    text-align: center;
+    color: var(--color-ink-soft);
+  }
+  .galeria__more a {
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-left: 0.4rem;
+  }
+  .galeria__more a:hover { text-decoration: underline; }
+</style>

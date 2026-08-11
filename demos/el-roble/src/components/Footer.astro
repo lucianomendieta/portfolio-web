@@ -1,0 +1,178 @@
+---
+import { site, reservaHref, contactoHref, comoLlegarHref } from '../data/site';
+
+/**
+ * Footer: cierre de la landing. Redes (IG/FB) + WhatsApp + dirección/horario
+ * resumidos + créditos.
+ */
+const anio = new Date().getFullYear();
+---
+<footer class="footer section--dark" role="contentinfo">
+  <!-- CTA final de reserva -->
+  <div class="footer__cta">
+    <div class="container footer__cta-inner">
+      <p class="footer__cta-text">¿Listo para tu próximo corte?</p>
+      <a class="btn" href={reservaHref} target="_blank" rel="noopener">
+        Reservar turno
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer__main">
+    <!-- Marca -->
+    <div class="footer__brand">
+      <p class="footer__name">El&nbsp;Roble</p>
+      <p class="footer__tagline">
+        Barbería en el Centro. Corte, barba y detalle.
+      </p>
+      <div class="footer__social">
+        {site.redes.instagram && (
+          <a href={site.redes.instagram} target="_blank" rel="noopener"
+             aria-label="Instagram de El Roble">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                 stroke-width="1.6" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        )}
+        {site.redes.facebook && (
+          <a href={site.redes.facebook} target="_blank" rel="noopener"
+             aria-label="Facebook de El Roble">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                 stroke-width="1.6" aria-hidden="true">
+              <path d="M15 8h-2a2 2 0 0 0-2 2v11" />
+              <path d="M8.5 13h5" />
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Navegación rápida -->
+    <nav class="footer__col" aria-label="Enlaces del pie">
+      <h3 class="footer__col-title">Explorar</h3>
+      <a href="#servicios">Servicios</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#galeria">Galería</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+
+    <!-- Contacto y horario -->
+    <div class="footer__col">
+      <h3 class="footer__col-title">Visitanos</h3>
+      <a href={comoLlegarHref} target="_blank" rel="noopener">
+        {site.direccion.calle}<br />{site.direccion.barrio}, {site.direccion.ciudad}
+      </a>
+      <p class="footer__hours">{site.horario.resumen}</p>
+      <a href={`tel:+${site.contactoGeneral.numero}`}>+595 971 555 200</a>
+      <a href={contactoHref} target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p>© {anio} El Roble. Todos los derechos reservados.</p>
+      <p class="footer__credit">
+        Centro, Asunción · Demo de portfolio
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--color-deep); color: var(--color-on-dark); }
+
+  /* Banda CTA superior */
+  .footer__cta {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
+    padding-block: var(--space-4);
+  }
+  .footer__cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+  }
+  .footer__cta-text {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    color: var(--color-on-dark);
+  }
+  @media (min-width: 720px) {
+    .footer__cta-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+
+  /* Cuerpo */
+  .footer__main {
+    display: grid;
+    gap: var(--space-5);
+    padding-block: var(--space-6) var(--space-5);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .footer__main { grid-template-columns: 2fr 1fr 1.4fr; gap: var(--space-4); }
+  }
+
+  .footer__name {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .footer__tagline {
+    color: var(--color-on-dark-soft);
+    max-width: 34ch;
+    margin-bottom: var(--space-3);
+  }
+  .footer__social { display: flex; gap: 0.75rem; }
+  .footer__social a {
+    display: grid;
+    place-items: center;
+    width: 44px; height: 44px;
+    border-radius: var(--radius-pill);
+    color: var(--color-on-dark);
+    border: 1px solid color-mix(in srgb, var(--color-on-dark) 20%, transparent);
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+                background-color var(--dur) var(--ease);
+  }
+  .footer__social a:hover {
+    color: var(--color-ink);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .footer__col { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer__col-title {
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 0.4rem;
+  }
+  .footer__col a { color: var(--color-on-dark-soft); width: fit-content; }
+  .footer__col a:hover { color: var(--color-on-dark); }
+  .footer__hours { color: var(--color-on-dark-soft); font-size: var(--fs-small); }
+
+  /* Barra inferior */
+  .footer__bottom {
+    border-top: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
+    padding-block: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--color-on-dark-soft);
+  }
+  .footer__bottom-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+  @media (min-width: 620px) {
+    .footer__bottom-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+</style>

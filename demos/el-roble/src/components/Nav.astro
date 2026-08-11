@@ -1,0 +1,150 @@
+---
+import { reservaHref, site } from '../data/site';
+
+/**
+ * Navegación fija por anclas (una sola página larga).
+ * Mobile: menú desplegable con <details> (cero JS de framework, accesible).
+ */
+const links = [
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#opiniones', label: 'Opiniones' },
+  { href: '#galeria', label: 'Galería' },
+  { href: '#ubicacion', label: 'Ubicación' },
+];
+---
+
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a href="#top" class="nav__brand" aria-label={`${site.nombre} — inicio`}>
+      <span class="nav__brand-name">El&nbsp;Roble</span>
+    </a>
+
+    <!-- Menú (mobile: <details> como acordeón; desktop: se muestra inline via CSS) -->
+    <details class="nav__menu" data-nav-menu>
+      <summary class="nav__toggle" aria-label="Abrir menú">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </summary>
+      <nav class="nav__links" aria-label="Navegación principal">
+        {links.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a class="btn nav__cta" href={reservaHref} target="_blank" rel="noopener">
+          Reservar
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Cierra el menú mobile al elegir un ancla (mejor UX; JS mínimo).
+  const menu = document.querySelector('[data-nav-menu]') as HTMLDetailsElement | null;
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => { menu.open = false; })
+  );
+  // Sombra del nav al hacer scroll.
+  const nav = document.querySelector('[data-nav]');
+  const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .nav.is-scrolled { box-shadow: var(--shadow-sm); background: color-mix(in srgb, var(--color-bg) 96%, transparent); }
+
+  .nav__inner {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+  }
+
+  /* --- Menú mobile con <details> --- */
+  .nav__menu { position: relative; }
+  .nav__toggle {
+    list-style: none;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+  }
+  .nav__toggle::-webkit-details-marker { display: none; }
+  .nav__toggle-bar {
+    width: 24px; height: 2px;
+    background: var(--color-ink);
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  .nav__menu[open] .nav__toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__menu[open] .nav__toggle-bar:nth-child(2) { opacity: 0; }
+  .nav__menu[open] .nav__toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav__links {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 240px;
+    padding: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+  }
+  .nav__links a {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .nav__links a:hover { background: var(--color-bg); }
+  .nav__cta { margin-top: 0.5rem; }
+  .nav__cta:hover { color: var(--color-white); }
+
+  /* --- Desktop: menú inline, sin hamburguesa --- */
+  @media (min-width: 860px) {
+    .nav__toggle { display: none; }
+    .nav__menu[open], .nav__menu { pointer-events: auto; }
+    .nav__links {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      min-width: 0;
+      padding: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      gap: 0.5rem;
+    }
+    .nav__links a { padding: 0.5rem 0.9rem; }
+    .nav__links a:not(.nav__cta):hover { background: none; color: var(--color-primary); }
+    .nav__cta { margin-top: 0; }
+    /* En desktop <details> siempre "abierto" visualmente.
+       Chrome moderno colapsa el contenido cerrado con content-visibility:hidden
+       en el pseudo ::details-content (por eso el menú quedaba con width 0);
+       lo forzamos visible. El display:flex cubre Firefox/Safari. */
+    .nav__menu:not([open]) .nav__links { display: flex; }
+    .nav__menu::details-content { content-visibility: visible; }
+  }
+</style>

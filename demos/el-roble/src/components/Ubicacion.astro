@@ -1,0 +1,140 @@
+---
+import { site, mapsEmbedSrc, comoLlegarHref, contactoHref } from '../data/site';
+
+/**
+ * Ubicación y horarios: mapa embebido (sin API key) + dirección + horario + contacto.
+ */
+
+// Tabla de horarios para mostrar.
+const horarios = [
+  { dia: 'Martes a viernes', horas: '10:00 – 20:00', abierto: true },
+  { dia: 'Sábado',           horas: '10:00 – 20:00', abierto: true },
+  { dia: 'Domingo y lunes',  horas: 'Cerrado',       abierto: false },
+];
+---
+<section class="section ubicacion" id="ubicacion" aria-labelledby="ubicacion-title">
+  <div class="container">
+    <header class="ubicacion__head">
+      <p class="eyebrow">Ubicación y horarios</p>
+      <h2 id="ubicacion-title" class="section-title">Nos encontrás en el Centro</h2>
+    </header>
+
+    <div class="ubicacion__grid">
+      <!-- Mapa -->
+      <div class="ubicacion__map">
+        <iframe
+          title="Mapa de El Roble en el Centro"
+          src={mapsEmbedSrc}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Datos -->
+      <div class="ubicacion__info">
+        <div class="info-block">
+          <h3 class="info-block__title">Dirección</h3>
+          <address class="info-block__addr">
+            {site.direccion.calle}<br />
+            {site.direccion.barrio}, {site.direccion.ciudad}
+          </address>
+          <a class="btn btn--outline info-block__btn" href={comoLlegarHref}
+             target="_blank" rel="noopener">
+            Cómo llegar
+          </a>
+        </div>
+
+        <div class="info-block">
+          <h3 class="info-block__title">Horarios</h3>
+          <ul class="horarios" role="list">
+            {horarios.map((h) => (
+              <li class="horarios__row" data-cerrado={!h.abierto}>
+                <span class="horarios__dia">{h.dia}</span>
+                <span class="horarios__horas">{h.horas}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h3 class="info-block__title">Contacto</h3>
+          <p class="info-block__addr">
+            <a href={`tel:+${site.contactoGeneral.numero}`}>
+              +595 971 555 200
+            </a>
+          </p>
+          <a class="btn btn--outline info-block__btn" href={contactoHref}
+             target="_blank" rel="noopener">
+            Escribinos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ubicacion__head { max-width: var(--container-narrow); margin-bottom: var(--space-5); }
+
+  .ubicacion__grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) {
+    .ubicacion__grid { grid-template-columns: 1.3fr 0.7fr; gap: var(--space-5); }
+  }
+
+  /* Mapa */
+  .ubicacion__map {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    min-height: 340px;
+    border: 1px solid var(--color-line);
+  }
+  .ubicacion__map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+    border: 0;
+    display: block;
+  }
+
+  /* Info */
+  .ubicacion__info {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+  .info-block__title {
+    font-size: var(--fs-h3);
+    margin-bottom: 0.5rem;
+  }
+  .info-block__addr {
+    font-style: normal;
+    color: var(--color-ink-soft);
+    line-height: var(--lh-body);
+    margin-bottom: var(--space-2);
+  }
+  .info-block__addr a:hover { color: var(--color-primary); }
+  .info-block__btn { margin-top: 0.25rem; }
+
+  /* Horarios */
+  .horarios { list-style: none; margin: 0; padding: 0; }
+  .horarios__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .horarios__row:last-child { border-bottom: 0; }
+  .horarios__dia { color: var(--color-ink); font-weight: 500; }
+  .horarios__horas { color: var(--color-muted); }
+  .horarios__row[data-cerrado='true'] .horarios__horas {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>
