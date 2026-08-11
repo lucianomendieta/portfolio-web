@@ -1,48 +1,51 @@
 /* =========================================================================
    Design tokens — El Roble (demo barbería)
-   Paleta oscura (carbón + bronce) + tipografías. Fuente única de verdad:
-   no hardcodear colores sueltos en los componentes, usar estas variables.
+   Paleta de cuero oscuro + acento oxblood + tipografía de cartel.
+   Fuente única de verdad: no hardcodear colores sueltos en los componentes,
+   usar estas variables.
    ========================================================================= */
 
 :root {
-  /* --- Color (tema oscuro barbería: carbón verdoso + bronce + cream) --- */
-  --color-bg: #1C1F1C;        /* fondo base — carbón verdoso */
-  --color-deep: #141613;      /* más oscuro — secciones destacadas / footer */
-  --color-primary: #C9A978;   /* bronce / dorado apagado — acento principal */
-  --color-ink: #ECE7D9;       /* cream cálido — texto y titulares */
-  --color-muted: #9A917F;     /* gris cálido — apoyos, subtítulos */
+  /* --- Color (barbería vintage: casi-negro + cuero + oxblood) --- */
+  --color-bg: #1E1813;        /* fondo base — carbón cálido */
+  --color-deep: #100D0A;      /* más oscuro — secciones destacadas / footer */
+  --color-primary: #7B2D26;   /* oxblood — único acento */
+  --color-ink: #ECE1CC;       /* hueso cálido — texto y titulares */
+  --color-muted: #B3A78D;     /* hueso apagado — apoyos, subtítulos */
   --color-white: #FFFFFF;     /* blanco puro */
 
   /* Derivados (para estados/superficies) */
-  --color-primary-dark: #B8975A;   /* hover del bronce */
-  --color-surface: #262A26;        /* tarjeta elevada sobre el carbón */
-  --color-line: rgba(236, 231, 217, 0.12); /* divisores sutiles */
-  --color-ink-soft: rgba(236, 231, 217, 0.70); /* texto secundario */
-  --color-on-dark: #ECE7D9;        /* texto sobre secciones más oscuras */
-  --color-on-dark-soft: rgba(236, 231, 217, 0.70);
+  --color-primary-dark: #9C3A31;   /* hover del oxblood */
+  --color-focus: #C4453A;          /* foco de teclado — oxblood aclarado para contraste 3:1 */
+  --color-surface: #251E17;        /* tarjeta elevada sobre el carbón */
+  --color-line: rgba(236, 225, 204, 0.14); /* divisores sutiles */
+  --color-ink-soft: rgba(236, 225, 204, 0.70); /* texto secundario */
+  --color-on-dark: #ECE1CC;        /* texto sobre secciones más oscuras */
+  --color-on-dark-soft: rgba(236, 225, 204, 0.70);
 
   /* --- Tipografía --- */
-  --font-heading: 'Oswald', 'Arial Narrow', system-ui, sans-serif;
+  --font-heading: 'Anton', 'Arial Narrow', system-ui, sans-serif;  /* titulares de cartel */
+  --font-label: 'Oswald', 'Arial Narrow', system-ui, sans-serif;   /* labels, nav, carta */
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Escala tipográfica fluida (mobile-first, clamp) */
-  --fs-hero: clamp(2.75rem, 8vw, 5.5rem);
-  --fs-h2: clamp(2rem, 5vw, 3.25rem);
-  --fs-h3: clamp(1.35rem, 3vw, 1.75rem);
+  --fs-hero: clamp(2.75rem, 9vw, 6rem);
+  --fs-h2: clamp(2rem, 5.5vw, 3.25rem);
+  --fs-h3: clamp(1.2rem, 2.6vw, 1.5rem);
   --fs-lead: clamp(1.05rem, 2.2vw, 1.35rem);
   --fs-body: 1rem;
   --fs-small: 0.875rem;
 
-  --lh-tight: 1.1;
+  --lh-tight: 0.98;
   --lh-snug: 1.3;
   --lh-body: 1.65;
 
   --tracking-wide: 0.16em;   /* para eyebrows / labels en mayúscula */
 
-  /* --- Forma y espacio --- */
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-pill: 999px;
+  /* --- Forma y espacio: bordes duros, sin píldoras --- */
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-pill: 0px;
 
   /* Ritmo de espaciado (base 8) */
   --space-1: 0.5rem;

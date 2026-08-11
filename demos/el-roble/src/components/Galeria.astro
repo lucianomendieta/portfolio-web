@@ -17,7 +17,7 @@ import { site } from '../data/site';
       <p class="eyebrow">Galería</p>
       <h2 id="galeria-title" class="section-title">Nuestros trabajos</h2>
       <p class="lead">
-        Una muestra de lo que hacemos, día a día.
+        Lo que sale de la silla, día a día.
       </p>
     </header>
 
@@ -81,9 +81,14 @@ import { site } from '../data/site';
     display: block;
   }
   .galeria__img {
-    transition: transform var(--dur) var(--ease);
+    filter: grayscale(1);
+    transition: transform var(--dur) var(--ease), filter var(--dur) var(--ease);
   }
-  .galeria__item:hover .galeria__img { transform: scale(1.04); }
+  .galeria__item:hover .galeria__img,
+  .galeria__item:focus-within .galeria__img {
+    transform: scale(1.04);
+    filter: grayscale(0);
+  }
 
   /* Placeholder con la medida (crema con línea dorada sutil) */
   .galeria__ph {
@@ -132,9 +137,12 @@ import { site } from '../data/site';
     color: var(--color-ink-soft);
   }
   .galeria__more a {
-    color: var(--color-primary);
+    color: var(--color-ink);
     font-weight: 600;
     margin-left: 0.4rem;
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: 3px;
   }
-  .galeria__more a:hover { text-decoration: underline; }
+  .galeria__more a:hover { color: var(--color-focus); }
 </style>

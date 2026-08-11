@@ -11,7 +11,7 @@ const anio = new Date().getFullYear();
   <!-- CTA final de reserva -->
   <div class="footer__cta">
     <div class="container footer__cta-inner">
-      <p class="footer__cta-text">¿Listo para tu próximo corte?</p>
+      <p class="footer__cta-text">Sacá turno y vení a sentarte</p>
       <a class="btn" href={reservaHref} target="_blank" rel="noopener">
         Reservar turno
       </a>
@@ -118,9 +118,11 @@ const anio = new Date().getFullYear();
   }
 
   .footer__name {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 600;
+    font-family: var(--font-label);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     margin-bottom: 0.5rem;
   }
   .footer__tagline {
@@ -147,12 +149,12 @@ const anio = new Date().getFullYear();
 
   .footer__col { display: flex; flex-direction: column; gap: 0.6rem; }
   .footer__col-title {
-    font-family: var(--font-body);
+    font-family: var(--font-label);
     font-size: var(--fs-small);
     font-weight: 600;
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--color-primary);
+    color: var(--color-on-dark-soft);
     margin-bottom: 0.4rem;
   }
   .footer__col a { color: var(--color-on-dark-soft); width: fit-content; }

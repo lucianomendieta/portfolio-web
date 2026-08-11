@@ -1,5 +1,13 @@
 ---
 import { site } from '../data/site';
+import '@fontsource/anton';
+import '@fontsource/oswald/500.css';
+import '@fontsource/oswald/600.css';
+import '@fontsource/oswald/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 
@@ -67,7 +75,7 @@ const jsonLd = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#1C1F1C" />
+    <meta name="theme-color" content="#1E1813" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -86,13 +94,7 @@ const jsonLd = {
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Google Fonts: precarga optimizada (Oswald + Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fuentes self-hosted vía Fontsource (import arriba): Anton, Oswald, Inter -->
 
     <!-- Schema JSON-LD LocalBusiness -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

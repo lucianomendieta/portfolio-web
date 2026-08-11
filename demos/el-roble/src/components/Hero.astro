@@ -74,7 +74,7 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
   /* Fallback oscuro con textura sutil mientras no haya foto real */
   .hero__bg--todo {
     background:
-      radial-gradient(120% 120% at 75% 15%, #2a2e2a 0%, var(--color-bg) 55%),
+      radial-gradient(120% 120% at 75% 15%, #2c2117 0%, var(--color-bg) 55%),
       var(--color-bg);
   }
   /* Velo para asegurar contraste del texto (AA) si se pone foto oscura */
@@ -106,9 +106,10 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
 
   .hero__title {
     font-size: var(--fs-hero);
-    font-weight: 600;
+    font-weight: 400;
     color: var(--color-ink);
     margin-bottom: var(--space-3);
+    text-shadow: 3px 3px 0 color-mix(in srgb, var(--color-primary) 55%, transparent);
   }
 
   .hero__lead {
@@ -133,7 +134,7 @@ import WhatsAppIcon from './WhatsAppIcon.astro';
     color: var(--color-ink-soft);
   }
   .hero__stars {
-    color: var(--color-primary);
+    color: var(--color-focus);
     letter-spacing: 0.1em;
     font-size: 1rem;
   }

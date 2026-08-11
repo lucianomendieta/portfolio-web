@@ -70,10 +70,11 @@ const links = [
   }
 
   .nav__brand-name {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-family: var(--font-label);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--color-ink);
   }
 
@@ -138,7 +139,7 @@ const links = [
       gap: 0.5rem;
     }
     .nav__links a { padding: 0.5rem 0.9rem; }
-    .nav__links a:not(.nav__cta):hover { background: none; color: var(--color-primary); }
+    .nav__links a:not(.nav__cta):hover { background: none; color: var(--color-focus); }
     .nav__cta { margin-top: 0; }
     /* En desktop <details> siempre "abierto" visualmente.
        Chrome moderno colapsa el contenido cerrado con content-visibility:hidden

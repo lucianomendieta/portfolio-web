@@ -1,54 +1,63 @@
 /**
- * Líneas de servicio (demo El Roble).
- * Sin menú de precios cerrado: `precioDesde: null` muestra "Precio a consultar".
+ * Carta de servicios (demo El Roble), armada como pizarra de precios de
+ * barbería: grupos con sub-ítems. Sin menú de precios cerrado:
+ * `precioDesde: null` muestra "A consultar".
  */
 
-export interface Servicio {
-  /** Nombre de la línea (ej. "Corte") */
+export interface ServicioItem {
+  /** Nombre del ítem tal como va en la carta. */
   nombre: string;
-  /** Bajada corta de la línea */
-  descripcion: string;
-  /** Sub-servicios incluidos (chips) */
-  items: string[];
   /**
    * Precio "desde" en guaraníes como texto ya formateado (ej. "80.000 Gs"),
-   * o null si no está definido -> se muestra placeholder.
+   * o null si no está definido -> se muestra "A consultar".
    */
   precioDesde: string | null;
-  /** Nota opcional */
-  nota?: string;
-  /** Ícono decorativo (id interno, ver componente) */
-  icono: 'corte' | 'barba' | 'combo' | 'perfilado';
+  /** Bajada corta opcional (solo para ítems que la necesitan, ej. el combo). */
+  descripcion?: string;
 }
 
-export const servicios: Servicio[] = [
+export interface GrupoServicio {
+  /** Nombre del grupo (ej. "Corte") */
+  nombre: string;
+  /** Nota destacada opcional (ej. "El más pedido") */
+  nota?: string;
+  items: ServicioItem[];
+}
+
+export const servicios: GrupoServicio[] = [
   {
     nombre: 'Corte',
-    descripcion: 'Corte a máquina y tijera, lavado y peinado.',
-    items: ['Corte clásico', 'Corte moderno', 'Lavado'],
-    precioDesde: null,
-    icono: 'corte',
-  },
-  {
-    nombre: 'Barba',
-    descripcion: 'Arreglo y afeitado con toalla caliente.',
-    items: ['Perfilado', 'Afeitado a navaja', 'Toalla caliente'],
-    precioDesde: null,
-    icono: 'barba',
+    items: [
+      { nombre: 'Corte clásico', precioDesde: null },
+      { nombre: 'Corte moderno', precioDesde: null },
+      { nombre: 'Lavado', precioDesde: null },
+    ],
   },
   {
     nombre: 'Corte + Barba',
-    descripcion: 'El combo completo, listo para salir.',
-    items: ['Corte', 'Barba', 'Terminado'],
-    precioDesde: null,
     nota: 'El más pedido',
-    icono: 'combo',
+    items: [
+      {
+        nombre: 'Combo completo',
+        precioDesde: null,
+        descripcion: 'Corte, barba y terminado. Listo para salir.',
+      },
+    ],
+  },
+  {
+    nombre: 'Barba',
+    items: [
+      { nombre: 'Perfilado', precioDesde: null },
+      { nombre: 'Afeitado a navaja', precioDesde: null },
+      { nombre: 'Toalla caliente', precioDesde: null },
+    ],
   },
   {
     nombre: 'Diseño y perfilado',
-    descripcion: 'Líneas, contornos y detalle a máquina.',
-    items: ['Line-up', 'Contornos', 'Diseños'],
-    precioDesde: null,
-    icono: 'perfilado',
+    items: [
+      { nombre: 'Line-up', precioDesde: null },
+      { nombre: 'Contornos', precioDesde: null },
+      { nombre: 'Diseños', precioDesde: null },
+    ],
   },
 ];

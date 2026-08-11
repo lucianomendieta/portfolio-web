@@ -1,0 +1,26 @@
+---
+/**
+ * Divisor de sección: franja diagonal tipo poste de barbero.
+ * Elemento de firma de El Roble — el único motivo decorativo del sitio,
+ * el resto de las secciones va disciplinado. Puramente ornamental -> aria-hidden.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['barber-stripe', className]} aria-hidden="true"></div>
+
+<style>
+  .barber-stripe {
+    height: 12px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--color-primary) 0px, var(--color-primary) 16px,
+      var(--color-ink) 16px, var(--color-ink) 32px,
+      var(--color-deep) 32px, var(--color-deep) 48px
+    );
+    border-block: 1px solid var(--color-line);
+  }
+</style>

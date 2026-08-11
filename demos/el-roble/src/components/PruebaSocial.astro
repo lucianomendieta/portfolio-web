@@ -18,7 +18,7 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
   <div class="container">
     <div class="prueba__head">
       <p class="eyebrow">Opiniones</p>
-      <h2 id="opiniones-title" class="section-title">Clientes que vuelven</h2>
+      <h2 id="opiniones-title" class="section-title">Se corre la voz</h2>
 
       <!-- Resumen de rating (dato confirmado) -->
       <div class="rating-summary" role="img"
@@ -85,8 +85,8 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
   .rating-summary__value {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 7vw, 3.75rem);
-    font-weight: 700;
-    color: var(--color-primary);
+    font-weight: 400;
+    color: var(--color-focus);
     line-height: 1;
   }
   .rating-summary__stars { display: inline-flex; gap: 0.15rem; font-size: 1.5rem; }
@@ -102,7 +102,7 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
     position: absolute;
     left: 0; top: 0;
     overflow: hidden;
-    color: var(--color-primary); /* estrella llena */
+    color: var(--color-focus); /* estrella llena */
     white-space: nowrap;
   }
 
@@ -132,7 +132,7 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
     font-family: var(--font-heading);
     font-size: 3.5rem;
     line-height: 0.6;
-    color: var(--color-primary);
+    color: var(--color-focus);
     height: 1.2rem;
   }
   .resena__text {
@@ -148,7 +148,7 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
     margin-top: 0.5rem;
     font-size: 0.8rem;
     font-style: normal;
-    color: var(--color-primary);
+    color: var(--color-on-dark-soft);
   }
   .resena__foot {
     display: flex;
@@ -157,7 +157,7 @@ const estrellas = Array.from({ length: 5 }, (_, i) => {
     padding-top: var(--space-2);
     border-top: 1px solid color-mix(in srgb, var(--color-on-dark) 12%, transparent);
   }
-  .resena__stars { color: var(--color-primary); letter-spacing: 0.1em; }
+  .resena__stars { color: var(--color-focus); letter-spacing: 0.1em; }
   .resena__autor {
     font-style: normal;
     font-weight: 600;
