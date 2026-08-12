@@ -1,0 +1,111 @@
+---
+const pasos = [
+  {
+    n: '1',
+    title: 'Me contás tu negocio',
+    desc: 'Por WhatsApp me explicás qué necesitás.',
+  },
+  {
+    n: '2',
+    title: 'Te propongo cómo encararlo',
+    desc: 'En el día te respondo con una idea concreta, sin compromiso.',
+  },
+  {
+    n: '3',
+    title: 'Lo armo',
+    desc: 'Diseño y código, avisándote cómo va.',
+  },
+  {
+    n: '4',
+    title: 'Queda online',
+    desc: 'Con dominio propio, y yo me encargo del mantenimiento.',
+  },
+];
+---
+
+<section class="proceso">
+  <div class="wrap">
+    <div class="head">
+      <span class="kicker">Proceso</span>
+      <h2 class="title">Así encaramos tu web</h2>
+    </div>
+
+    <div class="grid">
+      {
+        pasos.map((p) => (
+          <div class="step" data-reveal>
+            <span class="n">{p.n}</span>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: var(--pad-y) 0;
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: clamp(24px, 4vw, 40px);
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h2);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(24px, 3vw, 32px);
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .step .n {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--color-accent);
+  }
+  .step h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--color-ink);
+  }
+  .step p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+</style>

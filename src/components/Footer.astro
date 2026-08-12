@@ -1,17 +1,21 @@
 ---
 // Footer simple — vive dentro de la sección de CTA final, separado por un rule.
+import { LINKEDIN_URL } from '../config';
 ---
 
 <footer class="footer">
   <span>Luciano Mendieta — desarrollador web independiente</span>
-  <span>Asunción, PY · 25.29°S 57.63°W</span>
+  <span class="right">
+    Asunción, PY ·
+    <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </span>
 </footer>
 
 <style>
   .footer {
-    margin-top: clamp(48px, 9vw, 96px);
+    margin-top: clamp(48px, 9vw, 72px);
     padding-top: 24px;
-    border-top: 1px solid rgb(241 237 225 / 0.14);
+    border-top: 1px solid var(--color-border);
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -19,6 +23,12 @@
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.04em;
-    color: rgb(241 237 225 / 0.5);
+    color: var(--color-ink-faint);
+  }
+  .footer a {
+    color: var(--color-cyan);
+  }
+  .footer a:hover {
+    color: var(--color-ink);
   }
 </style>

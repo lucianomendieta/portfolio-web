@@ -1,0 +1,216 @@
+---
+import MuestraCard from './MuestraCard.astro';
+import { KUARAHY_URL } from '../config';
+
+// Piezas de demostración — capturas reales de las demos desplegadas.
+const demos = [
+  {
+    previewImage: '/img/muestra-studio-aurora.jpg',
+    previewAlt: 'Captura de la landing de Studio Aurora',
+    title: 'Landing de salón de belleza',
+    description:
+      'Muestra servicios, fotos y horarios, con el botón de reserva siempre a mano.',
+    specs: [
+      { term: 'propósito', value: 'reservas + visibilidad' },
+      { term: 'carga', value: '< 1s' },
+    ],
+    href: 'https://studio-aurora-theta.vercel.app/',
+  },
+  {
+    previewImage: '/img/muestra-el-roble.jpg',
+    previewAlt: 'Captura de la landing de El Roble',
+    title: 'Landing de barbería',
+    description:
+      'Estilo directo: qué cortan, cuánto tardan y cómo llegar. Pensada para el celular.',
+    specs: [
+      { term: 'propósito', value: 'mobile-first · WhatsApp' },
+      { term: 'carga', value: '< 1s' },
+    ],
+    href: 'https://el-roble-murex.vercel.app/',
+  },
+];
+---
+
+<section id="proyectos" class="proyectos">
+  <div class="wrap">
+    <div class="head">
+      <span class="kicker">Proyectos</span>
+      <h2 class="title">Cómo trabajo, y con quién</h2>
+    </div>
+
+    <!-- Kuarahy Tech — respaldo de empresa (destacado) -->
+    <a
+      href={KUARAHY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="card-kuarahy"
+      data-reveal
+    >
+      <div class="kuarahy-text">
+        <span class="tag">respaldo de empresa</span>
+        <h3>Kuarahy Tech</h3>
+        <p>
+          El estudio de software que cofundé. Ahí encaro proyectos más grandes, con
+          equipo y procesos de empresa — mi respaldo cuando tu idea necesita otra escala.
+        </p>
+      </div>
+      <span class="cta-inline">Ver estudio <span aria-hidden="true">↗</span></span>
+    </a>
+
+    <!-- Helpdesk — producto propio en desarrollo -->
+    <div class="card-helpdesk" data-reveal>
+      <span class="badge">en camino</span>
+      <h3>Helpdesk para comercios chicos</h3>
+      <p>
+        Estoy armando mi propio producto: una forma simple de juntar los mensajes de
+        tus clientes en un solo lugar, sin planillas ni WhatsApp perdido. Todavía no
+        tiene demo pública.
+      </p>
+    </div>
+
+    <!-- Demos desplegadas -->
+    <div class="demos-grid">
+      {demos.map((c) => <MuestraCard {...c} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proyectos {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: var(--pad-y) 0;
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 7vw, 64px);
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h2);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  /* Tarjeta Kuarahy — borde índigo para destacar */
+  .card-kuarahy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(20px, 4vw, 32px);
+    background: var(--color-card);
+    border: 1px solid var(--color-accent);
+    border-radius: 14px;
+    padding: clamp(24px, 4vw, 36px);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card-kuarahy:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-cyan);
+  }
+  .kuarahy-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 68ch;
+  }
+  .card-kuarahy .tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+  .card-kuarahy h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-ink);
+  }
+  .card-kuarahy p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+  .cta-inline {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  /* Tarjeta Helpdesk — borde punteado (en obra) */
+  .card-helpdesk {
+    position: relative;
+    background: var(--color-card);
+    border: 1.5px dashed var(--color-border-strong);
+    border-radius: 14px;
+    padding: clamp(24px, 4vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .badge {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background: var(--color-cyan);
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+  .card-helpdesk h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--color-ink);
+  }
+  .card-helpdesk p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    max-width: 56ch;
+  }
+
+  .demos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 28px);
+  }
+
+  @media (max-width: 640px) {
+    .card-kuarahy {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+  }
+</style>

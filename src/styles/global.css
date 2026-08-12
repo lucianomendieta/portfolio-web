@@ -7,30 +7,39 @@
    con var(--token) desde los <style> scoped de cada componente.
    ============================================================ */
 @theme {
-  /* Colores */
-  --color-tinta: #151b18;          /* tinta bosque   — fondo hero/servicios/CTA */
-  --color-carbon: #1c1712;         /* carbón cálido  — fondo muestras/en desarrollo */
-  --color-superficie: #241d16;     /* superficie carbón — fondo tarjetas de muestra */
-  --color-papel: #f1ede1;          /* papel arena    — texto sobre oscuro */
-  --color-rojo: #b23a2e;           /* rojo señal     — CTA / acentos */
-  --color-rojo-hover: #9a3126;     /* rojo hover */
-  --color-bronce: #9c7a34;         /* bronce apagado — sobre tinta bosque */
-  --color-bronce-claro: #b08544;   /* bronce claro   — sobre carbón cálido */
+  /* Colores — paleta tech oscura (ver docs/rebrand-brief.md).
+     Superficies: bg (página) → surface (secciones alternas) → card (tarjetas). */
+  --color-bg: #0d1117;             /* fondo página */
+  --color-surface: #141b23;        /* secciones alternas (proyectos, proceso) */
+  --color-card: #1a232c;           /* tarjetas */
+
+  --color-ink: #e6edf3;            /* texto principal */
+  --color-ink-soft: rgb(230 237 243 / 0.80);   /* párrafos */
+  --color-ink-faint: rgb(230 237 243 / 0.55);  /* secundario / mono */
+
+  --color-accent: #6366f1;         /* índigo — CTA / links */
+  --color-accent-hover: #4f4fd6;   /* índigo hover */
+  --color-cyan: #22d3ee;           /* cian — kickers, tags, detalles */
+  --color-cyan-soft: rgb(34 211 238 / 0.14);
+
+  --color-border: rgb(230 237 243 / 0.12);
+  --color-border-strong: rgb(230 237 243 / 0.28);
 
   /* Tipografía */
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 
   /* Escala tipográfica fluida (clamp) */
-  --text-h1: clamp(38px, 8.5vw, 92px);
-  --text-h2: clamp(26px, 5.5vw, 44px);
-  --text-h2-cta: clamp(32px, 7.5vw, 72px);
-  --text-body: clamp(16px, 3.4vw, 21px);
+  --text-h1: clamp(32px, 5.5vw, 58px);
+  --text-h2: clamp(24px, 3vw, 34px);
+  --text-h2-cta: clamp(30px, 5vw, 54px);
+  --text-body: clamp(16px, 2vw, 19px);
 
   /* Espaciado de sección (padding) */
-  --pad-y: clamp(48px, 9vw, 104px);
-  --pad-x: clamp(20px, 6vw, 88px);
+  --pad-y: clamp(56px, 9vw, 96px);
+  --pad-x: clamp(24px, 6vw, 64px);
+  --wrap: 1240px;
 }
 
 /* ============================================================
@@ -43,8 +52,8 @@
 
   body {
     margin: 0;
-    background: var(--color-tinta);
-    color: var(--color-papel);
+    background: var(--color-bg);
+    color: var(--color-ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -52,21 +61,21 @@
   }
 
   a {
-    color: var(--color-rojo);
+    color: var(--color-accent);
     text-decoration: none;
   }
   a:hover {
-    color: var(--color-bronce);
+    color: var(--color-cyan);
   }
 
   ::selection {
-    background: var(--color-rojo);
-    color: var(--color-papel);
+    background: var(--color-accent);
+    color: #fff;
   }
 
   /* Foco de teclado visible en TODO lo enfocable — nunca el azul default. */
   :focus-visible {
-    outline: 2px solid var(--color-rojo);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 2px;
   }

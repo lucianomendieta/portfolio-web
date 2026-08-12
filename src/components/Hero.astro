@@ -1,43 +1,49 @@
 ---
 import WhatsappCta from './WhatsappCta.astro';
+import { LINKEDIN_URL, KUARAHY_URL } from '../config';
 ---
 
-<section class="hero">
-  <!-- barra superior: wordmark + coordenada -->
-  <div class="topbar">
-    <span class="wordmark">Mendieta</span>
-    <span class="coord">25.29°S · 57.63°W</span>
-  </div>
+<header class="hero">
+  <div class="wrap">
+    <!-- barra superior: nombre + LinkedIn -->
+    <div class="topbar">
+      <span class="wordmark">Luciano Mendieta</span>
+      <a href={LINKEDIN_URL} class="li-link" target="_blank" rel="noopener noreferrer">
+        LinkedIn <span aria-hidden="true">↗</span>
+      </a>
+    </div>
 
-  <div class="stack">
-    <span class="eyebrow">Asunción, PY — dev independiente</span>
-    <h1 class="title">
-      Webs para negocios que la gente encuentra, no solo que tienen.
-    </h1>
-    <p class="lede">
-      Hago sitios rápidos y claros para salones, barberías y comercios de barrio.
-      Vos me contás qué hacés; yo lo pongo online para que te encuentren y te
-      escriban.
-    </p>
-    <div class="actions">
-      <WhatsappCta size="md" />
-      <a href="#muestras" class="ver-muestras">ver muestras</a>
+    <div class="stack">
+      <span class="kicker">Desarrollador web · Asunción, PY</span>
+      <h1 class="title">
+        Una web clara, para que a tu negocio lo encuentren y te escriban.
+      </h1>
+      <p class="lede">
+        Armo sitios rápidos y simples para negocios locales. Vos me contás cómo es
+        tu negocio; yo lo pongo online, fácil de entender y fácil de encontrar.
+      </p>
+      <p class="kuarahy-mention">
+        Además, soy cofundador de <a href={KUARAHY_URL} target="_blank" rel="noopener noreferrer">Kuarahy Tech</a>,
+        un estudio de software donde encaro proyectos más grandes.
+      </p>
+      <div class="actions">
+        <WhatsappCta size="md" />
+        <a href="#proyectos" class="ver-link">ver proyectos</a>
+      </div>
     </div>
   </div>
-
-  <!-- anotación de margen -->
-  <div class="annotation" aria-hidden="true">
-    <div class="rule"></div>
-    — 01 hero · 1440px<br />carga &lt; 1s
-  </div>
-</section>
+</header>
 
 <style>
   .hero {
-    position: relative;
-    background: var(--color-tinta);
-    color: var(--color-papel);
-    padding: clamp(28px, 6vw, 64px) var(--pad-x) clamp(48px, 9vw, 110px);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: clamp(32px, 6vw, 56px) 0 clamp(56px, 9vw, 96px);
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
   }
 
   .topbar {
@@ -46,33 +52,38 @@ import WhatsappCta from './WhatsappCta.astro';
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: clamp(56px, 12vw, 140px);
+    margin-bottom: clamp(32px, 8vw, 56px);
   }
   .wordmark {
     font-family: var(--font-display);
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
-  .coord {
+  .li-link {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
-    color: var(--color-bronce);
+    color: var(--color-cyan);
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .li-link:hover {
+    color: var(--color-ink);
   }
 
   .stack {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(28px, 5vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 24px);
     max-width: 1180px;
   }
-  .eyebrow {
+  .kicker {
     font-family: var(--font-mono);
-    font-size: clamp(11px, 2.6vw, 13px);
-    letter-spacing: 0.12em;
-    color: var(--color-bronce);
+    font-size: clamp(11px, 2.6vw, 12px);
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
     text-transform: uppercase;
   }
   .title {
@@ -80,63 +91,50 @@ import WhatsappCta from './WhatsappCta.astro';
     font-family: var(--font-display);
     font-weight: 500;
     font-size: var(--text-h1);
-    line-height: 1.02;
+    line-height: 1.05;
     letter-spacing: -0.02em;
-    color: var(--color-papel);
+    color: var(--color-ink);
     text-wrap: balance;
-    max-width: 14ch;
+    max-width: 15ch;
   }
   .lede {
     margin: 0;
     font-size: var(--text-body);
     line-height: 1.55;
-    color: rgb(241 237 225 / 0.72);
+    color: var(--color-ink-soft);
+    max-width: 50ch;
+  }
+  .kuarahy-mention {
+    margin: 4px 0 0;
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: var(--color-ink-faint);
     max-width: 52ch;
+  }
+  .kuarahy-mention a {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  .kuarahy-mention a:hover {
+    color: var(--color-cyan);
   }
 
   .actions {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 4vw, 28px);
+    gap: clamp(16px, 4vw, 20px);
     flex-wrap: wrap;
     margin-top: 8px;
   }
-  .ver-muestras {
+  .ver-link {
     font-family: var(--font-mono);
     font-size: 13px;
     letter-spacing: 0.04em;
-    color: rgb(241 237 225 / 0.7);
-    border-bottom: 1px solid rgb(156 122 52 / 0.5);
+    color: var(--color-ink-faint);
+    border-bottom: 1px solid var(--color-border-strong);
     padding-bottom: 2px;
   }
-  .ver-muestras:hover {
-    color: var(--color-papel);
-  }
-
-  .annotation {
-    position: absolute;
-    right: clamp(16px, 5vw, 48px);
-    bottom: clamp(20px, 5vw, 40px);
-    text-align: right;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 1.7;
-    color: rgb(156 122 52 / 0.85);
-    letter-spacing: 0.03em;
-  }
-  .annotation .rule {
-    width: 46px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-bronce));
-    margin-left: auto;
-    margin-bottom: 8px;
-  }
-
-  /* La anotación de margen se solaparía con el contenido en pantallas
-     angostas: la ocultamos en mobile (es decorativa). */
-  @media (max-width: 640px) {
-    .annotation {
-      display: none;
-    }
+  .ver-link:hover {
+    color: var(--color-ink);
   }
 </style>

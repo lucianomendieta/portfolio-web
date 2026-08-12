@@ -15,55 +15,61 @@ const servicios = [
   {
     n: '03',
     title: 'Dominio y hosting',
-    desc: 'Me encargo de la parte técnica: tu dirección web propia y que el sitio esté siempre online.',
+    desc: 'Me encargo de la parte técnica: tu dirección propia y que el sitio esté siempre online.',
     tag: 'sin vueltas',
   },
 ];
 ---
 
 <section class="servicios">
-  <div class="head">
-    <span class="eyebrow">04 — servicios</span>
-    <h2 class="title">Lo que hago por vos</h2>
-  </div>
+  <div class="wrap">
+    <div class="head">
+      <span class="kicker">Servicios</span>
+      <h2 class="title">Lo que hago por vos</h2>
+    </div>
 
-  <div class="menu">
-    {
-      servicios.map((s) => (
-        <div class="row" data-reveal>
-          <span class="num">{s.n}</span>
-          <div class="row-body">
-            <div class="row-text">
-              <h3 class="row-title">{s.title}</h3>
-              <p class="row-desc">{s.desc}</p>
+    <div class="menu">
+      {
+        servicios.map((s) => (
+          <div class="row" data-reveal>
+            <span class="num">{s.n}</span>
+            <div class="row-body">
+              <div class="row-text">
+                <h3 class="row-title">{s.title}</h3>
+                <p class="row-desc">{s.desc}</p>
+              </div>
+              <span class="row-tag">{s.tag}</span>
             </div>
-            <span class="row-tag">{s.tag}</span>
           </div>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
   .servicios {
-    background: var(--color-tinta);
-    color: var(--color-papel);
-    padding: var(--pad-y) var(--pad-x);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: var(--pad-y) 0;
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
   }
 
   .head {
     display: flex;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: clamp(28px, 5vw, 52px);
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: clamp(24px, 4vw, 40px);
   }
-  .eyebrow {
+  .kicker {
     font-family: var(--font-mono);
     font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--color-bronce);
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
     text-transform: uppercase;
   }
   .title {
@@ -73,36 +79,37 @@ const servicios = [
     font-size: var(--text-h2);
     line-height: 1.05;
     letter-spacing: -0.015em;
-    color: var(--color-papel);
+    color: var(--color-ink);
   }
 
   .menu {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
+    display: flex;
+    flex-direction: column;
     max-width: 900px;
-    border-top: 1px solid rgb(241 237 225 / 0.16);
+    border-top: 1px solid var(--color-border);
   }
 
   .row {
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: clamp(16px, 3vw, 28px);
-    align-items: start;
-    padding: clamp(22px, 4vw, 32px) 0;
-    border-bottom: 1px solid rgb(241 237 225 / 0.16);
+    display: flex;
+    gap: clamp(16px, 3vw, 20px);
+    align-items: flex-start;
+    padding: clamp(22px, 4vw, 30px) 0;
+    border-bottom: 1px solid var(--color-border);
   }
   .num {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--color-bronce);
-    padding-top: 6px;
+    color: var(--color-cyan);
+    padding-top: 4px;
+    flex: none;
+    width: 28px;
   }
 
   .row-body {
+    flex: 1;
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 12px;
     flex-wrap: wrap;
   }
   .row-text {
@@ -112,20 +119,26 @@ const servicios = [
     margin: 0 0 6px;
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(20px, 4vw, 27px);
-    color: var(--color-papel);
+    font-size: clamp(20px, 4vw, 22px);
+    color: var(--color-ink);
   }
   .row-desc {
     margin: 0;
     font-size: 15px;
     line-height: 1.55;
-    color: rgb(241 237 225 / 0.68);
+    color: var(--color-ink-soft);
   }
   .row-tag {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: rgb(156 122 52 / 0.9);
+    color: var(--color-cyan);
     letter-spacing: 0.04em;
     white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .row-body {
+      flex-direction: column;
+    }
   }
 </style>

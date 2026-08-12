@@ -1,0 +1,91 @@
+---
+// Sobre mí — voz humana en primera persona, sin foto.
+// El monograma "LM" hace de presencia visual (placeholder editable).
+---
+
+<section class="about">
+  <div class="wrap">
+    <div class="monogram" aria-hidden="true"><span>LM</span></div>
+    <div class="about-text">
+      <span class="kicker">Sobre mí</span>
+      <h2 class="title">Trabajás directo conmigo: sin intermediarios, sin vueltas.</h2>
+      <p class="desc">
+        Soy Luciano, desarrollador web independiente en Asunción. Y si tu proyecto
+        necesita otra escala, tengo el respaldo de Kuarahy Tech, el estudio de
+        software que cofundé, para encararlo en serio.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: 0 0 clamp(56px, 9vw, 96px);
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    display: flex;
+    gap: clamp(20px, 4vw, 32px);
+    align-items: center;
+  }
+
+  .monogram {
+    flex: none;
+    width: 68px;
+    height: 68px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-3deg);
+  }
+  .monogram span {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--color-accent);
+  }
+
+  .about-text {
+    max-width: 58ch;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(20px, 3vw, 24px);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .desc {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 640px) {
+    .wrap {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  }
+</style>

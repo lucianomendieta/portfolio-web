@@ -23,12 +23,13 @@ const { size = 'md' } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--color-rojo);
-    color: var(--color-papel);
+    background: var(--color-accent);
+    color: #fff;
     font-family: var(--font-body);
     font-weight: 600;
     border-radius: 8px;
     line-height: 1.1;
+    white-space: nowrap;
     transition:
       transform 0.15s ease,
       background 0.15s ease;
@@ -44,9 +45,9 @@ const { size = 'md' } = Astro.props;
   }
 
   .cta:hover {
-    background: var(--color-rojo-hover);
+    background: var(--color-accent-hover);
     transform: translateY(-1px);
-    color: var(--color-papel);
+    color: #fff;
   }
 
   .arrow {
