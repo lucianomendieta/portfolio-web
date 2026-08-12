@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env.local
 .env.*.local
 
+# notas privadas (nunca se publican ni se suben)
+*.private.md
+notas-privadas/
+
 # macOS / editors
 .DS_Store
 Thumbs.db
@@ -24,3 +28,4 @@ Thumbs.db
 !.vscode/extensions.json
 .idea/
 .claude/
+.\docs\
