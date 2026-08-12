@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Luchii">
-  <rect width="32" height="32" rx="7" fill="#151B18"/>
-  <path d="M11 8v13.2c0 .9.7 1.6 1.6 1.6H21" fill="none" stroke="#B23A2E" stroke-width="3.2" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Luciano Mendieta">
+  <rect width="32" height="32" rx="7" fill="#0d1117"/>
+  <text x="16" y="22" text-anchor="middle" font-family="'Space Grotesk', system-ui, sans-serif"
+        font-size="15" font-weight="700" letter-spacing="-0.5" fill="#818cf8">LM</text>
 </svg>

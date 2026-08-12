@@ -1,0 +1,74 @@
+---
+// CTA intermedio — capta al que se convenció a mitad de página.
+// Los chips son afirmaciones verdaderas (no testimonios), sirven de confianza.
+import WhatsappCta from './WhatsappCta.astro';
+---
+
+<section class="band">
+  <div class="wrap">
+    <div class="text">
+      <h2 class="title">¿Te sirve cómo trabajo? Escribime y lo vemos.</h2>
+      <ul class="chips">
+        <li>Respondo en el día</li>
+        <li>Sin compromiso</li>
+        <li>Trabajás directo conmigo</li>
+        <li>Respaldo de Kuarahy</li>
+      </ul>
+    </div>
+    <div class="cta">
+      <WhatsappCta size="md" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .band {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: clamp(32px, 6vw, 56px) 0;
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 40px) var(--pad-x);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 40px);
+    flex-wrap: wrap;
+  }
+
+  .title {
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    max-width: 20ch;
+  }
+  .chips {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+  }
+  .chips li {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-soft);
+    border: 1px solid var(--color-border-strong);
+    padding: 5px 11px;
+    border-radius: 999px;
+  }
+  .cta {
+    flex: none;
+  }
+</style>

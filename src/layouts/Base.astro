@@ -9,10 +9,39 @@ import '@fontsource/inter/600.css';
 import '@fontsource/ibm-plex-mono/500.css';
 
 import '../styles/global.css';
-import { SITE } from '../config';
+import { SITE, LINKEDIN_URL, KUARAHY_URL } from '../config';
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(SITE.ogImage, Astro.site).href;
+
+// Datos estructurados — ayudan a Google a entender quién sos y qué ofrecés.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Luciano Mendieta',
+  jobTitle: 'Desarrollador web',
+  description: SITE.description,
+  url: canonical,
+  sameAs: [LINKEDIN_URL, KUARAHY_URL],
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Kuarahy Tech',
+    url: KUARAHY_URL,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Asunción',
+    addressCountry: 'PY',
+  },
+  knowsAbout: ['Desarrollo web', 'Landing pages', 'SEO local', 'Astro'],
+  makesOffer: {
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: 'Desarrollo de sitios web para negocios',
+    },
+  },
+};
 ---
 
 <!doctype html>
@@ -40,6 +69,8 @@ const ogImage = new URL(SITE.ogImage, Astro.site).href;
     <meta name="twitter:title" content={SITE.title} />
     <meta name="twitter:description" content={SITE.description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>
   <body>
     <slot />

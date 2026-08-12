@@ -1,0 +1,121 @@
+---
+// Testimonios — prueba social. Sección lista para cuando tengas clientes reales.
+//
+// 👉 CÓMO USAR: agregá objetos reales al array de abajo. Con el array vacío,
+//    la sección NO se renderiza (nada de citas inventadas en producción).
+//    Con 1+ testimonios reales, aparece automáticamente.
+//
+// Ejemplo de formato (descomentá y reemplazá con algo REAL, aunque sea un
+// mensaje de WhatsApp de un cliente contento con su permiso):
+//
+// { quote: 'Me armó la web en tres días y ya me escribieron dos clientes nuevos.',
+//   name: 'Nombre Apellido', business: 'Barbería El Roble' }
+
+interface Testimonio {
+  quote: string;
+  name: string;
+  business: string;
+}
+
+const testimonios: Testimonio[] = [
+  // ← pegá acá tus testimonios reales
+];
+---
+
+{
+  testimonios.length > 0 && (
+    <section class="testimonios">
+      <div class="wrap">
+        <div class="head">
+          <span class="kicker">Testimonios</span>
+          <h2 class="title">Lo que dicen mis clientes</h2>
+        </div>
+        <div class="grid">
+          {testimonios.map((t) => (
+            <figure class="card" data-reveal>
+              <blockquote>“{t.quote}”</blockquote>
+              <figcaption>
+                <span class="name">{t.name}</span>
+                <span class="business">{t.business}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .testimonios {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    padding: var(--pad-y) 0;
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: clamp(24px, 4vw, 40px);
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+  }
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-h2);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 28px);
+  }
+  .card {
+    margin: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: clamp(24px, 4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(17px, 2.5vw, 20px);
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .business {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--color-cyan);
+  }
+</style>

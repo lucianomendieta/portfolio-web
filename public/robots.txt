@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO(luchii): actualizá el dominio cuando esté el real (Vercel o propio).
+Sitemap: https://portfolio-mendieta.vercel.app/sitemap.xml

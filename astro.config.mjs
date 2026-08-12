@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   output: 'static',
   // TODO: reemplazar por el dominio real cuando esté definido (usado para canonical/OG).
-  site: 'https://luchii.dev',
+  site: 'https://portfolio-mendieta.vercel.app/',
   vite: {
     plugins: [tailwindcss()],
   },

@@ -17,8 +17,10 @@
   --color-ink-soft: rgb(230 237 243 / 0.80);   /* párrafos */
   --color-ink-faint: rgb(230 237 243 / 0.55);  /* secundario / mono */
 
-  --color-accent: #6366f1;         /* índigo — CTA / links */
-  --color-accent-hover: #4f4fd6;   /* índigo hover */
+  --color-accent: #6366f1;         /* índigo — bordes / detalles decorativos */
+  --color-accent-btn: #5850ec;     /* fondo de botones (blanco encima pasa AA 5.56:1) */
+  --color-accent-btn-hover: #4f46e5;
+  --color-link: #818cf8;           /* índigo claro — texto/links (6.34:1 sobre bg, AA ✓) */
   --color-cyan: #22d3ee;           /* cian — kickers, tags, detalles */
   --color-cyan-soft: rgb(34 211 238 / 0.14);
 
@@ -48,6 +50,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 64px; /* compensa la nav sticky al saltar por anclas */
   }
 
   body {
@@ -61,7 +64,7 @@
   }
 
   a {
-    color: var(--color-accent);
+    color: var(--color-link);
     text-decoration: none;
   }
   a:hover {

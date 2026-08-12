@@ -53,6 +53,11 @@ const demos = [
           El estudio de software que cofundé. Ahí encaro proyectos más grandes, con
           equipo y procesos de empresa — mi respaldo cuando tu idea necesita otra escala.
         </p>
+        <ul class="bullets">
+          <li>Software a medida</li>
+          <li>Productos SaaS propios</li>
+          <li>Equipo y procesos de empresa</li>
+        </ul>
       </div>
       <span class="cta-inline">Ver estudio <span aria-hidden="true">↗</span></span>
     </a>
@@ -138,7 +143,7 @@ const demos = [
     font-family: var(--font-mono);
     font-size: 10.5px;
     letter-spacing: 0.12em;
-    color: var(--color-accent);
+    color: var(--color-link);
     text-transform: uppercase;
   }
   .card-kuarahy h3 {
@@ -154,11 +159,35 @@ const demos = [
     line-height: 1.55;
     color: var(--color-ink-soft);
   }
+  .bullets {
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+  .bullets li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+  .bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-cyan);
+  }
   .cta-inline {
     flex: none;
     font-family: var(--font-mono);
     font-size: 13px;
-    color: var(--color-accent);
+    color: var(--color-link);
     white-space: nowrap;
   }
 

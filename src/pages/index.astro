@@ -1,20 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Proyectos from '../components/Proyectos.astro';
 import Servicios from '../components/Servicios.astro';
+import CtaBand from '../components/CtaBand.astro';
 import Proceso from '../components/Proceso.astro';
+import Testimonios from '../components/Testimonios.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 ---
 
 <Base>
+  <Nav />
   <main>
     <Hero />
     <About />
     <Proyectos />
     <Servicios />
+    <CtaBand />
     <Proceso />
+    <Testimonios />
     <CtaFinal />
   </main>
 </Base>

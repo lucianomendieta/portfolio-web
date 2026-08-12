@@ -1,12 +1,15 @@
 ---
-// Botón CTA rojo hacia WhatsApp. Reutilizado por Hero y CtaFinal.
+// Botón CTA índigo hacia WhatsApp. Reutilizado por Nav, Hero, CtaBand y CtaFinal.
 // El número real se define una sola vez en src/config.ts (ver TODO ahí).
 import { WHATSAPP_URL } from '../config';
 
 interface Props {
-  size?: 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
+  /** Texto corto para la nav (sm). Por defecto usa el texto completo. */
+  label?: string;
 }
-const { size = 'md' } = Astro.props;
+const { size = 'md', label } = Astro.props;
+const text = label ?? 'Escribime por WhatsApp';
 ---
 
 <a
@@ -15,7 +18,7 @@ const { size = 'md' } = Astro.props;
   target="_blank"
   rel="noopener noreferrer"
 >
-  Escribime por WhatsApp <span class="arrow" aria-hidden="true">→</span>
+  {text} <span class="arrow" aria-hidden="true">→</span>
 </a>
 
 <style>
@@ -23,7 +26,7 @@ const { size = 'md' } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--color-accent);
+    background: var(--color-accent-btn);
     color: #fff;
     font-family: var(--font-body);
     font-weight: 600;
@@ -35,6 +38,10 @@ const { size = 'md' } = Astro.props;
       background 0.15s ease;
   }
 
+  .cta.sm {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
   .cta.md {
     font-size: 16px;
     padding: 15px 26px; /* ~48px de alto ≥ 44px objetivo táctil */
@@ -45,7 +52,7 @@ const { size = 'md' } = Astro.props;
   }
 
   .cta:hover {
-    background: var(--color-accent-hover);
+    background: var(--color-accent-btn-hover);
     transform: translateY(-1px);
     color: #fff;
   }

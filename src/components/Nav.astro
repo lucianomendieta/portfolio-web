@@ -1,0 +1,89 @@
+---
+// Nav sticky — orientación rápida + CTA siempre a mano.
+// Los links saltan a las secciones (ids: proyectos, servicios, proceso, contacto).
+import WhatsappCta from './WhatsappCta.astro';
+import { LINKEDIN_URL } from '../config';
+---
+
+<nav class="nav" aria-label="Navegación principal">
+  <div class="wrap">
+    <a href="#top" class="wordmark">Luciano Mendieta</a>
+
+    <div class="links">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="li">
+        LinkedIn <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="cta">
+      <WhatsappCta size="sm" label="WhatsApp" />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 12px var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
+  .wordmark:hover {
+    color: var(--color-ink);
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 28px);
+    margin-left: auto;
+  }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-soft);
+  }
+  .links a:hover {
+    color: var(--color-cyan);
+  }
+  .links .li {
+    color: var(--color-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .cta {
+    flex: none;
+  }
+
+  /* En mobile: solo wordmark + botón. Los anchors se ocultan (el scroll sigue funcionando). */
+  @media (max-width: 720px) {
+    .links {
+      display: none;
+    }
+    .wrap {
+      gap: 12px;
+    }
+  }
+</style>
