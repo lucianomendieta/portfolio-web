@@ -13,9 +13,8 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/luciano-mendieta-aa05813a4/';
 
-// Kuarahy Tech — estudio de software que cofundás (respaldo de empresa).
-// TODO(luchii): reemplazar por el dominio real (.com.py) cuando esté listo.
-export const KUARAHY_URL = 'https://kuarahy-tech.vercel.app';
+// Kuarahy Tech — estudio de software que confudo (respaldo de empresa).
+export const KUARAHY_URL = 'https://kuarahy-tech.com.py/';
 
 // Metadatos del sitio (SEO / OG).
 export const SITE = {
