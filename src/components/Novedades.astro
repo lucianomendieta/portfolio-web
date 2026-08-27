@@ -1,6 +1,12 @@
 ---
 import { novedades } from '../data/novedades';
 
+interface Props {
+  limit?: number;
+}
+const { limit } = Astro.props;
+const items = limit ? novedades.slice(0, limit) : novedades;
+
 const tagLabel: Record<string, string> = {
   cliente: 'cliente',
   producto: 'producto',
@@ -16,7 +22,7 @@ const tagLabel: Record<string, string> = {
     </div>
 
     <ol class="feed">
-      {novedades.map((n) => (
+      {items.map((n) => (
         <li class="entrada" data-reveal>
           <div class="meta">
             <time class="fecha">{n.fecha}</time>
