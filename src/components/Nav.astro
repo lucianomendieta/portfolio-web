@@ -7,7 +7,10 @@ import { LINKEDIN_URL } from '../config';
 
 <nav class="nav" aria-label="Navegación principal">
   <div class="wrap">
-    <a href="#top" class="wordmark">Luciano Mendieta</a>
+    <a href="/" class="wordmark">
+      <img src="/logo-full.svg" alt="Luciano Mendieta" class="logo-full" />
+      <img src="/favicon.svg" alt="Luciano Mendieta" class="logo-icon" />
+    </a>
 
     <div class="links">
       <a href="/proyectos">Proyectos</a>
@@ -42,12 +45,17 @@ import { LINKEDIN_URL } from '../config';
     gap: 24px;
   }
   .wordmark {
-    font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--color-ink);
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  .logo-full {
+    height: 80px;
+    width: auto;
+  }
+  .logo-icon {
+    display: none;
+    height: 30px;
+    width: auto;
   }
   .wordmark:hover {
     color: var(--color-ink);
@@ -84,6 +92,12 @@ import { LINKEDIN_URL } from '../config';
     }
     .wrap {
       gap: 12px;
+    }
+    .logo-full {
+      display: none;
+    }
+    .logo-icon {
+      display: block;
     }
   }
 </style>
